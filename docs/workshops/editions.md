@@ -8,7 +8,7 @@ Each university edition lives in this repository. An annotated tag freezes its c
 | COMMUNITY-2-MMCL student starter | Branch `codex/community-2-mmcl`; release tag `COMMUNITY-2-MMCL` | Both challenges begin unfinished. Use the tag for the released snapshot and the branch for ongoing maintenance. |
 | MMCL facilitator solutions | Branch `codex/community-2-mmcl-facilitator` | Contains bug removal and one example redesign. A public branch is discoverable by students; it is a teaching reference, not a private answer key. |
 
-The MMCL branch and tag must be published before students can fetch them. See the [MMCL student guide](community-2-mmcl.md) for setup, exercises, and completion criteria. The [README](../../README.md) remains the main guide for the existing Sui Mainnet CLI workflow.
+See the [MMCL student guide](community-2-mmcl.md) for setup, exercises, and completion criteria, and the [validation record](validation-mmcl.md) for checks and limitations. The [README](../../README.md) remains the main guide for the existing Sui Mainnet CLI workflow.
 
 ## Recover the original edition
 
