@@ -4,6 +4,7 @@ import { PROFILE_PHOTO_PATH } from '../lib/profilePhoto';
 import type { UsePortfolioResult } from '../types';
 import BrandIcon from './BrandIcon';
 import '../styles/community-partners.css';
+import '../styles/facilitator-card.css';
 
 export function truncateValue(value: string): string {
   if (!value) return '—';
@@ -57,7 +58,7 @@ export function CardFrontFace({
   const renderPhoto = showPhoto && !forcePhotoFallback;
 
   return (
-    <div className="card-side card-front">
+    <div className="card-side card-front facilitator-card">
       <div className="material-noise" />
       <div className="material-light" />
 
@@ -262,7 +263,7 @@ export function CardBackFace({
   backFaceAriaHidden = false,
 }: Pick<CardFaceProps, 'portfolio' | 'backFaceTabIndex' | 'backFaceAriaHidden'>) {
   return (
-    <div className="card-side card-back" aria-hidden={backFaceAriaHidden}>
+    <div className="card-side card-back facilitator-card" aria-hidden={backFaceAriaHidden}>
       <div className="material-noise" />
       <div className="material-light" />
 

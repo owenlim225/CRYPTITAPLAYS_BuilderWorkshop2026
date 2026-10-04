@@ -1,0 +1,163 @@
+/* Challenge 2 example: an editorial layout, shared by live and exported faces.
+   The 1020px canvas still scales as one unit; no viewport-dependent rearranging. */
+.card-side.facilitator-card {
+  --blue: #7be3ca;
+  background: linear-gradient(120deg, #101f2c 0%, #132d38 70%, #183f47 100%);
+  box-shadow: inset 0 0 0 2px #7be3ca55;
+}
+
+.facilitator-card .cryptita-deboss,
+.facilitator-card .back-logo {
+  display: none;
+}
+
+.facilitator-card .card-top {
+  height: 18%;
+  padding: 30px 54px 0;
+}
+
+.facilitator-card .brand h2 {
+  font-size: 26px;
+  letter-spacing: .08em;
+}
+
+.facilitator-card .brand p {
+  font-size: 13px;
+  letter-spacing: .18em;
+}
+
+.facilitator-card .card-main {
+  height: 60%;
+  grid-template-columns: minmax(0, 1fr) 250px;
+  gap: 42px;
+  padding: 12px 54px 24px;
+}
+
+.facilitator-card .profile-photo-wrap {
+  grid-column: 2;
+  grid-row: 1;
+  height: 100%;
+  max-height: 342px;
+  aspect-ratio: auto;
+  border-radius: 70px 12px 70px 12px;
+  padding: 5px;
+  background: linear-gradient(150deg, #7be3ca, #d4b578);
+  transform: rotate(2deg);
+}
+
+.facilitator-card .profile-photo {
+  border-radius: 65px 8px 65px 8px;
+}
+
+.facilitator-card .profile-details {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.facilitator-card .identity-header {
+  margin-bottom: 18px;
+  padding-left: 16px;
+  border-left: 4px solid #d4b578;
+}
+
+.facilitator-card .identity-header h1 {
+  font-size: 39px;
+  line-height: 1.05;
+  overflow-wrap: anywhere;
+}
+
+.facilitator-card .info-grid {
+  gap: 18px;
+  margin-top: 16px;
+}
+
+.facilitator-card .wide-field {
+  margin-top: 16px;
+}
+
+.facilitator-card .skills span {
+  background: #7be3ca12;
+  border: 1px solid #7be3ca40;
+  border-radius: 5px;
+  color: #e0f8f1;
+}
+
+.facilitator-card .card-bottom {
+  height: 15%;
+  margin: 0 54px;
+  border: 0;
+  border-top: 1px solid #7be3ca55;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.facilitator-card .credential-field {
+  padding: 12px 18px;
+}
+
+.facilitator-card .back-content {
+  inset: 60px 66px;
+  transform: none;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-rows: 1fr auto;
+  gap: 36px;
+  align-items: center;
+  text-align: left;
+}
+
+.facilitator-card .back-brand h2 {
+  max-width: 550px;
+  font-size: 64px;
+  line-height: .95;
+}
+
+.facilitator-card .back-brand p {
+  font-size: 16px;
+  letter-spacing: .16em;
+  margin-top: 18px;
+}
+
+.facilitator-card .back-divider {
+  display: none;
+}
+
+.facilitator-card .back-built-on {
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px 24px;
+  border-left: 2px solid #d4b578;
+  gap: 12px;
+}
+
+.facilitator-card .back-community {
+  grid-column: 1 / -1;
+  padding-top: 28px;
+  border-top: 1px solid #7be3ca55;
+}
+
+.facilitator-card .community-title {
+  color: #7be3ca;
+  font-size: 13px;
+  font-style: normal;
+  text-transform: uppercase;
+  letter-spacing: .18em;
+}
+
+.facilitator-card .community-logos--mmcl {
+  gap: 16px 24px;
+}
+
+.facilitator-card .community-partner {
+  min-height: 82px;
+  border-radius: 12px;
+  background: #06141d66;
+  border: 1px solid #ffffff12;
+  opacity: 1;
+}
+
+.facilitator-card .community-partner img {
+  height: 48px;
+  max-width: 190px;
+}
