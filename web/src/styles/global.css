@@ -197,6 +197,7 @@ button {
 }
 
 .card-scale__inner {
+  position: relative;
   width: 1020px;
   max-width: none;
   transform-style: preserve-3d;
@@ -318,4 +319,36 @@ button {
   color: var(--chain-primary);
   border-color: rgba(var(--chain-primary-rgb), 0.35);
   background: rgba(var(--chain-primary-rgb), 0.08);
+}
+
+/* Keep the tools within the measured stack on smaller screens. */
+@media (max-width: 900px) {
+  .card-stage__stack {
+    flex-direction: column;
+  }
+
+  .social-actions {
+    width: 1020px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .social-actions__tools,
+  .social-actions__share-links {
+    flex-direction: row;
+  }
+
+  .social-actions__tools {
+    flex-shrink: 0;
+  }
+
+  .social-actions__share {
+    gap: 8px;
+  }
+
+  .social-actions__link {
+    width: auto;
+    white-space: nowrap;
+  }
 }

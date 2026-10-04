@@ -577,11 +577,12 @@ opacity: 0.26;
 
 .flip-btn {
   position: absolute;
+  z-index: 5;
 
   right: -4px;
   top: 48%;
 
-  transform: translateY(-50%);
+  transform: translateY(-50%) translateZ(4px);
 
   display: flex;
   align-items: center;
@@ -620,7 +621,8 @@ opacity: 0.26;
 .flip-btn:hover {
   transform:
     translateY(-50%)
-    translateX(-4px);
+    translateX(-4px)
+    translateZ(4px);
 
   filter: brightness(1.08);
 }

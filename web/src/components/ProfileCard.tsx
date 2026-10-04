@@ -3,6 +3,7 @@ import { useCardOrbit } from '../hooks/useCardOrbit';
 import { PROFILE_PHOTO_PATH } from '../lib/profilePhoto';
 import type { UsePortfolioResult } from '../types';
 import { CardBackFace, CardFrontFace } from './ProfileCardFaces';
+
 import '../styles/profile-card.css';
 
 type ProfileCardProps = {
@@ -85,25 +86,6 @@ export default function ProfileCard({ portfolio, isOrbiting = false }: ProfileCa
           role="group"
           aria-label="Builder profile card"
         >
-          <button
-            type="button"
-            className="flip-btn"
-            disabled={motionLocked}
-            onClick={(event) => {
-              event.stopPropagation();
-              if (motionLocked) return;
-              setIsFlipped((current) => !current);
-            }}
-            onKeyDown={handleFlipKeyDown}
-            aria-pressed={isFlipped}
-            aria-label={isFlipped ? 'Show front of card' : 'Show back of card'}
-          >
-            <span className="flip-icon" aria-hidden="true">
-              ↻
-            </span>
-            Flip
-          </button>
-
           <CardFrontFace
             portfolio={portfolio}
             photoSrc={PROFILE_PHOTO_PATH}
@@ -119,6 +101,26 @@ export default function ProfileCard({ portfolio, isOrbiting = false }: ProfileCa
             backFaceAriaHidden={!isFlipped}
           />
         </div>
+        {/* Keep the control outside the rotating faces so it stays readable and clickable. */}
+        <button
+          type="button"
+          className="flip-btn"
+          disabled={motionLocked}
+          onClick={(event) => {
+            event.stopPropagation();
+            if (motionLocked) return;
+            setIsFlipped((current) => !current);
+          }}
+          onKeyDown={handleFlipKeyDown}
+          aria-pressed={isFlipped}
+          aria-label={isFlipped ? 'Show front of card' : 'Show back of card'}
+        >
+          <span className="flip-icon" aria-hidden="true">
+            ↻
+          </span>
+          Flip
+        </button>
+
       </div>
     </div>
   );

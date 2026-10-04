@@ -32,6 +32,7 @@ function useCardLayout(
   footerRef: RefObject<HTMLElement | null>,
 ) {
   const [scale, setScale] = useState(1);
+  const [stackWidth, setStackWidth] = useState(CARD_WIDTH);
   const [stackHeight, setStackHeight] = useState(FALLBACK_STACK_HEIGHT);
   const [stageInsets, setStageInsets] = useState<StageInsets>({ top: 56, bottom: 56 });
 
@@ -46,12 +47,14 @@ function useCardLayout(
 
       const measuredStackHeight = stackRef.current?.offsetHeight ?? FALLBACK_STACK_HEIGHT;
       setStackHeight(measuredStackHeight);
+      const measuredStackWidth = stackRef.current?.offsetWidth ?? CARD_WIDTH;
+      setStackWidth(measuredStackWidth);
 
       const availableWidth = stage.clientWidth - STAGE_HORIZONTAL_PADDING * 2;
       const availableHeight = stage.clientHeight - STAGE_GAP * 2;
       const fitScale = Math.min(
         1,
-        availableWidth / CARD_WIDTH,
+        availableWidth / measuredStackWidth,
         availableHeight / measuredStackHeight,
       );
       const viewportScale = window.visualViewport?.scale ?? 1;
@@ -78,7 +81,7 @@ function useCardLayout(
     };
   }, [stageRef, stackRef, headerRef, footerRef]);
 
-  return { scale, stackHeight, stageInsets };
+  return { scale, stackWidth, stackHeight, stageInsets };
 }
 
 export default function App() {
@@ -87,7 +90,7 @@ export default function App() {
   const stackRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLElement>(null);
   const footerRef = useRef<HTMLElement>(null);
-  const { scale, stackHeight, stageInsets } = useCardLayout(stageRef, stackRef, headerRef, footerRef);
+  const { scale, stackWidth, stackHeight, stageInsets } = useCardLayout(stageRef, stackRef, headerRef, footerRef);
   const [isOrbiting, setIsOrbiting] = useState(false);
 
   useEffect(() => {
@@ -120,7 +123,7 @@ export default function App() {
             <div
               className="card-stage__scale-box"
               style={{
-                width: CARD_WIDTH * scale,
+                width: stackWidth * scale,
                 height: stackHeight * scale,
               }}
             >
