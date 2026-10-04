@@ -1,4 +1,5 @@
 import { useEffect, type ReactNode } from 'react';
+import { createPortal } from 'react-dom';
 import { useCardPhotoExport } from '../hooks/useCardPhotoExport';
 import type { UsePortfolioResult } from '../types';
 import BuilderCardExport from './BuilderCardExport';
@@ -41,7 +42,7 @@ export default function CardPhotoExport({ portfolio, children }: CardPhotoExport
         isGenerating,
         canExport,
       })}
-      {exportError ? (
+      {exportError ? createPortal(
         <div className="export-toast" role="alert" aria-live="assertive">
           <div className="export-toast__content">
             <p className="export-toast__title">Export failed</p>
@@ -55,7 +56,8 @@ export default function CardPhotoExport({ portfolio, children }: CardPhotoExport
           >
             ×
           </button>
-        </div>
+        </div>,
+        document.body,
       ) : null}
     </>
   );
