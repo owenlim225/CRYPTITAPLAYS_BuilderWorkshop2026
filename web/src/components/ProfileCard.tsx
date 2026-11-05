@@ -109,7 +109,7 @@ export default function ProfileCard({ portfolio, isOrbiting = false }: ProfileCa
             backFaceTabIndex={backFaceTabIndex}
             backFaceAriaHidden={!isFlipped}
           />
-          <WorkshopBugs isFlipped={isFlipped} motionLocked={motionLocked} />
+          
           {[false, true].map((back) => (
             <button
               key={String(back)}
