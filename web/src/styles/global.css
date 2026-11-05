@@ -340,6 +340,19 @@ button {
   white-space: nowrap;
 }
 
+.social-actions__share-feedback {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.social-actions__share-feedback textarea {
+  box-sizing: border-box;
+  width: 100%;
+  margin-top: 8px;
+  resize: vertical;
+}
+
 .social-actions__export {
   cursor: pointer;
   color: #221619;

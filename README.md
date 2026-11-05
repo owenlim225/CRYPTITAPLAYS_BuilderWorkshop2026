@@ -149,6 +149,8 @@ npm run preview
 1. **Move package** (`move/`) — `builder_card` module with an owned `BuilderCard`, Display metadata, and `create_builder_card` (builder number claimed automatically from the shared registry).
 2. **Static website** (`web/`) — single-viewport homepage that reads one on-chain object, shows your profile photo from `web/public/assets/profile.png`, and exports the card client-side. The GIF button creates a looping 1600 × 1600 animation using the shared card faces and `web/public/assets/workshop-export.png`. The square artwork scales to fill the output without cropping or padding. GIF encoding uses `gifenc` in a browser worker. The Camera button below it downloads a 1080 × 1350 PNG showing both card faces. Neither export uploads data to an external service.
 
+The LinkedIn button opens a share for your site in the visitor's signed-in LinkedIn account and copies the workshop deployment caption with that site's URL. To tag [Cryptita Plays](https://www.linkedin.com/company/cryptitaplays/posts/), [GrantiX](https://www.linkedin.com/company/grantix/home/), and [BingX](https://www.linkedin.com/company/bingxofficial/home/), replace each plain-text `@` name by selecting the matching page from LinkedIn's suggestions after pasting; a website share link cannot create mentions automatically. The visitor reviews and publishes the post in LinkedIn.
+
 
 
 ### How data flows
