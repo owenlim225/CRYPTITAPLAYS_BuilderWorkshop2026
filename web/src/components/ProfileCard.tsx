@@ -3,7 +3,6 @@ import { useCardOrbit } from '../hooks/useCardOrbit';
 import { PROFILE_PHOTO_PATH } from '../lib/profilePhoto';
 import type { UsePortfolioResult } from '../types';
 import { CardBackFace, CardFrontFace } from './ProfileCardFaces';
-import { WorkshopBugs } from './WorkshopBugs';
 import '../styles/profile-card.css';
 
 type ProfileCardProps = {
@@ -109,7 +108,6 @@ export default function ProfileCard({ portfolio, isOrbiting = false }: ProfileCa
             backFaceTabIndex={backFaceTabIndex}
             backFaceAriaHidden={!isFlipped}
           />
-          <WorkshopBugs isFlipped={isFlipped} motionLocked={motionLocked} />
           {[false, true].map((back) => (
             <button
               key={String(back)}
