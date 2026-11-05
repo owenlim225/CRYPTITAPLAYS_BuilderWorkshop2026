@@ -136,7 +136,7 @@ export default function SocialActions({
           Share Your Build
         </h2>
         <div className="social-actions__share-links">
-          <a
+          {/* <a
             className="social-actions__link"
             href="https://www.facebook.com/cryptitaplays"
             target="_blank"
@@ -155,7 +155,7 @@ export default function SocialActions({
           >
             <BrandIcon icon={siX} size={18} decorative />
             <span className="social-actions__label">X</span>
-          </a>
+          </a> */}
           <a
             className="social-actions__link"
             href="https://www.linkedin.com/company/cryptitaplays/"
@@ -166,7 +166,7 @@ export default function SocialActions({
             <BrandIcon icon={siLinkedin} size={18} decorative />
             <span className="social-actions__label">LinkedIn</span>
           </a>
-          <a
+          {/* <a
             className="social-actions__link"
             href="https://www.instagram.com/cryptitaplays/"
             target="_blank"
@@ -175,7 +175,7 @@ export default function SocialActions({
           >
             <BrandIcon icon={siInstagram} size={18} decorative />
             <span className="social-actions__label">Instagram</span>
-          </a>
+          </a> */}
         </div>
       </section>
     </div>
