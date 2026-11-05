@@ -5,13 +5,13 @@
 version = 4
 
 [pinned.mainnet.MoveStdlib]
-source = { git = "https://github.com/MystenLabs/sui.git", subdir = 'crates\sui-framework\packages\move-stdlib', rev = "06734f6ff0af45d8632a14a4dc4b100197f6b1a2" }
+source = { git = "https://github.com/MystenLabs/sui.git", subdir = 'crates\sui-framework\packages\move-stdlib', rev = "05ad86a3e86c522deea116f80dc2bf2309a53363" }
 use_environment = "mainnet"
 manifest_digest = "C4FE4C91DE74CBF223B2E380AE40F592177D21870DC2D7EB6227D2D694E05363"
 deps = {}
 
 [pinned.mainnet.Sui]
-source = { git = "https://github.com/MystenLabs/sui.git", subdir = 'crates\sui-framework\packages\sui-framework', rev = "06734f6ff0af45d8632a14a4dc4b100197f6b1a2" }
+source = { git = "https://github.com/MystenLabs/sui.git", subdir = 'crates\sui-framework\packages\sui-framework', rev = "05ad86a3e86c522deea116f80dc2bf2309a53363" }
 use_environment = "mainnet"
 manifest_digest = "CD547CB1ACCE0880C835DAED2D8FFCB91D56C833AE5240D3AA5B918398263195"
 deps = { MoveStdlib = "MoveStdlib" }
@@ -29,13 +29,13 @@ manifest_digest = "E41BBD67BE8940D26C79D78B028477EF5B33BA217A1282C78ACB344CF8A5E
 deps = { std = "MoveStdlib", sui = "Sui" }
 
 [pinned.testnet.MoveStdlib]
-source = { git = "https://github.com/MystenLabs/sui.git", subdir = 'crates\sui-framework\packages\move-stdlib', rev = "2a0becb2fcc6989e492981104af67f62f2c9511a" }
+source = { git = "https://github.com/MystenLabs/sui.git", subdir = 'crates\sui-framework\packages\move-stdlib', rev = "719fb2960ccfbf9f4d33041f8ea5146d30671696" }
 use_environment = "testnet"
 manifest_digest = "C4FE4C91DE74CBF223B2E380AE40F592177D21870DC2D7EB6227D2D694E05363"
 deps = {}
 
 [pinned.testnet.Sui]
-source = { git = "https://github.com/MystenLabs/sui.git", subdir = 'crates\sui-framework\packages\sui-framework', rev = "2a0becb2fcc6989e492981104af67f62f2c9511a" }
+source = { git = "https://github.com/MystenLabs/sui.git", subdir = 'crates\sui-framework\packages\sui-framework', rev = "719fb2960ccfbf9f4d33041f8ea5146d30671696" }
 use_environment = "testnet"
 manifest_digest = "7AFB66695545775FBFBB2D3078ADFD084244D5002392E837FDE21D9EA1C6D01C"
 deps = { MoveStdlib = "MoveStdlib" }
@@ -47,7 +47,7 @@ manifest_digest = "A8621C9DC0F07784659551F7A85615377654C155A66E8C211C72DED31E88B
 deps = { builder_registry = "builder_registry", std = "MoveStdlib", sui = "Sui" }
 
 [pinned.testnet.builder_registry]
-source = { git = "https://github.com/Cryptita-Plays/cryptita-builder-registry.git", subdir = "builder_registry", rev = "7ff5baa4fb6a50951c35062ce3f9e2dcbe6f3403" }
+source = { git = "https://github.com/Cryptita-Plays/cryptita-builder-registry.git", subdir = "builder_registry", rev = "cd6ca4805517d3542cf161abcb1d0fd1f13c26a5" }
 use_environment = "testnet"
 manifest_digest = "5745706258F61D6CE210904B3E6AE87A73CE9D31A6F93BE4718C442529332A87"
 deps = { std = "MoveStdlib", sui = "Sui" }
