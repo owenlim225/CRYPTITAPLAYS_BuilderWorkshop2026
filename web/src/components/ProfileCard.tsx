@@ -3,7 +3,6 @@ import { useCardOrbit } from '../hooks/useCardOrbit';
 import { PROFILE_PHOTO_PATH } from '../lib/profilePhoto';
 import type { UsePortfolioResult } from '../types';
 import { CardBackFace, CardFrontFace } from './ProfileCardFaces';
-import { WorkshopBugs } from './WorkshopBugs';
 import '../styles/profile-card.css';
 
 type ProfileCardProps = {
