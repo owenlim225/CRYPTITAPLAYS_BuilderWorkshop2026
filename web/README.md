@@ -10,6 +10,7 @@ This folder is the **static site**. On-chain writes happen with the **Sui CLI** 
 npm install
 npm run dev      # http://localhost:5173
 npm run lint     # oxlint
+npm run test     # mapper and GIF export checks
 npm run build    # tsc -b && vite build → dist/
 npm run preview  # serve dist/
 ```
@@ -20,7 +21,7 @@ Copy `.env.example` to `.env`:
 
 ```env
 VITE_PORTFOLIO_OBJECT_ID=
-VITE_SUI_NETWORK=testnet
+VITE_SUI_NETWORK=mainnet
 VITE_CHAIN=sui
 ```
 
@@ -32,4 +33,4 @@ VITE_CHAIN=sui
 
 Vercel: **Root Directory** `web`, **Build** `npm run build`, **Output** `dist`.
 
-Full workshop loop (photo → deploy site → publish Move → create card → point env → rebuild): see the [root README](../README.md). Specs: [`../spec/`](../spec/README.md).
+Full workshop loop (photo → deploy site → publish Move → create card → point env → rebuild): see the [root README](../README.md).

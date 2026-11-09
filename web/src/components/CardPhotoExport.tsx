@@ -1,4 +1,4 @@
-import { useEffect, type ReactNode } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import { useCardPhotoExport } from '../hooks/useCardPhotoExport';
 import type { UsePortfolioResult } from '../types';
@@ -23,6 +23,7 @@ type CardPhotoExportProps = {
 export default function CardPhotoExport({ portfolio, children }: CardPhotoExportProps) {
   const builderName = portfolio.data?.fields.builder_name ?? 'builder';
   const canExport = portfolio.status === 'success';
+  const [cameraFlashKey, setCameraFlashKey] = useState(0);
   const { captureRef, exportPhoto: exportGif, exportStill, isGenerating, isCapturingPhoto, exportProgress, cancelExport, exportError, clearExportError } =
     useCardPhotoExport(builderName, canExport);
 
@@ -44,6 +45,7 @@ export default function CardPhotoExport({ portfolio, children }: CardPhotoExport
           void exportGif();
         },
         onCameraClick: () => {
+          setCameraFlashKey((key) => key + 1);
           void exportStill();
         },
         isGenerating,
@@ -52,6 +54,7 @@ export default function CardPhotoExport({ portfolio, children }: CardPhotoExport
         exportProgress,
         onCancelExport: cancelExport,
       })}
+      {cameraFlashKey > 0 ? <div key={cameraFlashKey} className="camera-flash" aria-hidden="true" /> : null}
       {exportError ? createPortal(
         <div className="export-toast" role="alert" aria-live="assertive">
           <div className="export-toast__content">

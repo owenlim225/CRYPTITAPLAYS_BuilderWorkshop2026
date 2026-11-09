@@ -1,4 +1,3 @@
-import { siSui } from '../lib/brandIcons';
 import { objectId as configuredObjectId, suiscanObjectUrl } from '../config';
 import { PROFILE_PHOTO_PATH } from '../lib/profilePhoto';
 import type { UsePortfolioResult } from '../types';
@@ -253,7 +252,7 @@ export function CardFrontFace({
           rel="noopener noreferrer"
           aria-label="Visit Sui"
         >
-          <BrandIcon icon={siSui} size={32} className="sui-logo" decorative />
+          <BrandIcon icon="sui" size={32} className="sui-logo" decorative />
         </a>
       </div>
     </div>
@@ -293,7 +292,7 @@ export function CardBackFace({
             aria-label="Visit Sui"
             tabIndex={backFaceTabIndex}
           >
-            <BrandIcon icon={siSui} size={26} decorative />
+            <BrandIcon icon="sui" size={26} decorative />
             <span>Sui</span>
           </a>
         </div>

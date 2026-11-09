@@ -1,5 +1,4 @@
 import { forwardRef } from 'react';
-import { siGithub } from '../lib/brandIcons';
 import BrandIcon from './BrandIcon';
 
 const GITHUB_REPO_URL =
@@ -29,7 +28,7 @@ const Header = forwardRef<HTMLElement>(function Header(_props, ref) {
         rel="noopener noreferrer"
         aria-label="View workshop source on GitHub"
       >
-        <BrandIcon icon={siGithub} size={18} decorative />
+        <BrandIcon icon="github" size={18} decorative />
         <span className="site-header__github-label">GitHub</span>
       </a>
     </header>

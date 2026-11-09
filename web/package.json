@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "oxlint src scripts test",
-    "test": "node --experimental-strip-types --test test/*.test.mjs",
+    "test": "node --experimental-strip-types --test test/*.test.mjs && node scripts/check-card-gif.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

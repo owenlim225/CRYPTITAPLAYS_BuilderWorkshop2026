@@ -166,8 +166,7 @@ export function useCardPhotoExport(builderName: string, canExport: boolean) {
         image.decode().catch(() => { throw new Error('A card image could not load. Refresh and try again.'); })
       )), signal, 'Card images took too long to load. Check your connection and try again.');
       node.style.visibility = 'visible';
-      node.style.left = '0';
-      node.style.zIndex = '2147483647';
+      node.style.left = '-10000px';
       stage = 'Capturing card photo';
       const png = await exportStage(toPng(node, {
         width: PHOTO_WIDTH,

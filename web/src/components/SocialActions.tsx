@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { siLinkedin } from '../lib/brandIcons';
 import BrandIcon from './BrandIcon';
 
 function CameraIcon() {
@@ -187,7 +186,7 @@ Learn → Build → Deploy. #Blockchain4Youth #B4HER #Web3OnCampus`;
             aria-label="Share your BuilderCard on LinkedIn"
             onClick={copyLinkedInCaption}
           >
-            <BrandIcon icon={siLinkedin} size={18} decorative />
+            <BrandIcon icon="linkedin" size={18} decorative />
             <span className="social-actions__label">LinkedIn</span>
           </a>
           <p className="social-actions__share-feedback">

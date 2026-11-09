@@ -12,6 +12,20 @@
   overflow: hidden;
 }
 
+.camera-flash {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483647;
+  pointer-events: none;
+  background: white;
+  animation: camera-flash 180ms ease-out both;
+}
+
+@keyframes camera-flash {
+  from { opacity: 0.85; }
+  to { opacity: 0; }
+}
+
 .builder-card-export__studio {
   --card-highlight-rgb: 217, 163, 0;
 
@@ -79,7 +93,6 @@
     0 10px 20px rgba(40, 32, 24, 0.16);
 }
 
-/* Warm reflective border for the maroon and gold card */
 .builder-card-export__card-wrap::before {
   content: '';
   position: absolute;
