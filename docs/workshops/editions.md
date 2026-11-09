@@ -9,7 +9,7 @@ Each university edition lives in this repository. An annotated tag freezes its c
 | MMCL facilitator solutions | Branch `codex/community-2-mmcl-facilitator` | Contains bug removal and one example redesign. It is a teaching reference, not a private answer key. |
 | Marinduque State University student starter | Branches `main` and `codex/marinduque-state-university` | Current edition with the same two unfinished frontend challenges and a new school seal and community partner lineup. |
 
-See the [Marinduque State University student guide](marinduque-state-university.md) for setup, exercises, and completion criteria. The MMCL guide and validation record remain on the archive branch. The [README](../../README.md) remains the main guide for the existing Sui Mainnet CLI workflow.
+See the [frontend challenges](frontend-challenges.md) for setup, exercises, and completion criteria. The MMCL guide and validation record remain on the archive branch. The [README](../../README.md) remains the main guide for the existing Sui Mainnet CLI workflow.
 
 ## Recover the original edition
 

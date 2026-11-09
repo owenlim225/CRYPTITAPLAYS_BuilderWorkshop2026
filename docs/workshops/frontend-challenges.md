@@ -1,12 +1,12 @@
-# Marinduque State University: frontend challenges
+# Frontend challenges
 
-This university edition starts with two unfinished exercises. First remove the insects that keep returning to the card; then redesign the entire card layout in your own style. Suggested beginner timings are 10–15 minutes and 30–45 minutes respectively. These are guides, not deadlines.
+The starter includes two unfinished exercises. First remove the insects that keep returning to the card; then redesign the entire card layout in your own style. Suggested beginner timings are 10–15 minutes and 30–45 minutes respectively. These are guides, not deadlines.
 
 The site remains a read-only React/TypeScript frontend. These exercises require no wallet, gas, new Move deployment, or on-chain write. The [main workshop README](../../README.md) still describes the existing Mainnet CLI workflow if you also need to create your own BuilderCard. See [edition references](editions.md) for earlier workshops.
 
-## Start from the Marinduque State University starter
+## Start from the frontend starter
 
-The repository's `main` branch contains the Marinduque State University starter. Follow the README's fork instructions (copying only `main` is enough), then clone your fork. Replace the two placeholders below with your account and fork name. If you forked before this edition was published, sync your fork's `main` with upstream first.
+The repository's `main` branch contains the frontend starter. Follow the README's fork instructions (copying only `main` is enough), then clone your fork. Replace the two placeholders below with your account and fork name. If you forked before the current starter was published, sync your fork's `main` with upstream first.
 
 ```bash
 git clone --branch main https://github.com/YOUR_GITHUB_USERNAME/YOUR_FORK_NAME.git
@@ -101,7 +101,7 @@ Your redesign must preserve:
 - Empty, loading, error, and successful data states. An error must remain visible and must not be replaced with invented profile data.
 - Front/back flip, keyboard-operable controls, copy feedback, and the distinction between a card click and a link/button click. Back-face links must retain their hidden-face focus handling.
 - A card that fits the existing single-viewport experience on narrow and desktop screens, with readable text and visible focus indicators.
-- The Marinduque State University partner lineup: CJC Race, Blockchain4Youth, Grantix, Kamiyon Studio, and Blockchain4Her. Preserve asset proportions and the existing verified destinations.
+- The existing partner lineup: CJC Race, Blockchain4Youth, Grantix, Kamiyon Studio, and Blockchain4Her. Preserve asset proportions and the existing verified destinations.
 - Shared live/export content, both faces visible in the exported composition, and Camera disabled until the profile successfully loads.
 
 <details>
@@ -129,6 +129,6 @@ Manually check the following and record what you actually verified:
 2. Spin, stop, flip with pointer, and use Tab plus Enter/Space on the Flip button. Confirm insects stay removed and links/copy controls still behave correctly.
 3. With an empty object ID, confirm placeholders and disabled Camera. With a valid configured card, check loading then success. In browser developer tools, block the Sui GraphQL request and reload to confirm the error is visible; the app fetches on mount, so blocking a request after success alone does not change the card. Keep localhost unblocked so Vite can load. Unblock the request and reload to recover, then restore any changed configuration.
 4. After a successful fetch, copy object ID and owner; export an image and inspect its actual **1080 × 1350** dimensions, both card faces, logo proportions, readable fields, and absence of insects. Check that a missing photo has a usable fallback. If no successful fetch is available, mark export and populated-data checks as pending rather than claiming they passed.
-5. Keep `.env` out of Git. Review your diff, commit your solution on your own branch, and push that branch to your fork if submitting through GitHub. Share front/back screenshots, the exported image when available, and a short description of your design choices and checks.
+5. Clear any personal Object ID from `web/.env` before sharing the starter. Review your diff, commit your solution on your own branch, and push that branch to your fork if submitting through GitHub. Share front/back screenshots, the exported image when available, and a short description of your design choices and checks.
 
 If you deploy your solution from your fork's `main`, the README's hosting branch instructions apply directly. If you choose another solution branch, select that branch in your hosting settings. The original CLI and network instructions still apply to any optional on-chain work.

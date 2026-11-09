@@ -8,8 +8,7 @@ No previous blockchain experience is required.
 
 This is the **University of Perpetual Help System Laguna 2026 workshop guide**.
 The `main` branch includes two frontend exercises: remove the returning insects and redesign the card.
-Follow the [frontend challenges](docs/workshops/marinduque-state-university.md) after you can run the website in Step 3.
-These exercises reuse the earlier MSU challenge guide.
+Complete the [frontend challenges](docs/workshops/frontend-challenges.md) after you can run the website in Step 3.
 Those exercises work with an empty card and do not require SUI.
 
 **This guide is for Windows and PowerShell only.**
@@ -55,6 +54,7 @@ See [university editions](docs/workshops/editions.md) for earlier workshops.
   - [Step 7: Create your personal card](#step-7)
   - [Step 8: Connect the website to your card](#step-8)
   - [Step 9: Check your finished website](#step-9)
+  - [Complete the frontend challenges](#complete-the-frontend-challenges)
 - [Essential resources](#essential-resources)
 - [Troubleshooting](#troubleshooting)
 - [Change or reset the displayed card](#change-or-reset-the-displayed-card)
@@ -251,7 +251,7 @@ It is usually `http://localhost:5173`, but the number can change if that port is
 
 **Check:** your photo appears on the card.
 Blank profile fields and a grey status dot are expected because you have not created your card data yet.
-The starter's returning insects are part of the [school exercises](docs/workshops/marinduque-state-university.md).
+The starter's returning insects are part of the [frontend challenges](docs/workshops/frontend-challenges.md).
 
 Keep this terminal open while you use the local website.
 To stop the website, click inside the terminal and press **Ctrl+C**.
@@ -293,7 +293,7 @@ If Git says "nothing to commit", check whether the correct photo is already on y
 
 Open your fork on GitHub and confirm that `web/public/assets/profile.png` is your photo.
 Vercel builds from GitHub, so files saved only on your computer will not appear online.
-If you completed the school exercises, follow their save-and-push instructions before deploying.
+If you completed the frontend challenges, follow their save-and-push instructions before deploying.
 
 1. Open [Vercel's new-project page](https://vercel.com/new) and sign in with GitHub.
 2. Import your fork.
@@ -565,11 +565,15 @@ These exports happen in your browser.
 The LinkedIn button opens a draft share for you to review and publish.
 To tag a partner, select its page from LinkedIn's suggestions after pasting the caption.
 
+## Complete the frontend challenges
+
+Complete both [frontend challenges](docs/workshops/frontend-challenges.md): remove the returning insects and redesign the card.
+Follow the challenge completion checks and share your results with your workshop submission.
 Complete the [workshop submission form](https://forms.gle/UDkMqhAU3z2ekFn66).
 
 ## Essential resources
 
-- [School exercises](docs/workshops/marinduque-state-university.md): remove the insects and redesign the card.
+- [Frontend challenges](docs/workshops/frontend-challenges.md): remove the insects and redesign the card.
 - [University editions](docs/workshops/editions.md): earlier workshop versions.
 - [Sui installation](https://docs.sui.io/getting-started/onboarding/sui-install) and [client setup](https://docs.sui.io/getting-started/onboarding/configure-sui-client).
 - [Chocolatey installation](https://docs.chocolatey.org/en-us/choco/setup/).
