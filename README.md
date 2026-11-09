@@ -592,7 +592,12 @@ To tag a partner, select its page from LinkedIn's suggestions after pasting the 
 
 Complete both [frontend challenges](docs/workshops/frontend-challenges.md): remove the returning insects and redesign the card.
 Follow the challenge completion checks and share your results with your workshop submission.
-Complete the [workshop submission form](https://forms.gle/UDkMqhAU3z2ekFn66).
+
+<p align="center">
+  <a href="https://forms.gle/UDkMqhAU3z2ekFn66">
+    <img src="https://img.shields.io/badge/Complete_the_Workshop_Exercise-7C3AED?style=for-the-badge&amp;logo=googleforms&amp;logoColor=white" alt="Complete the Workshop Exercise submission form" height="48">
+  </a>
+</p>
 
 ## Essential resources
 
