@@ -240,10 +240,10 @@ Right-click `web` in VS Code and select **Open in Integrated Terminal**.
 
 ```sh
 pwd
-npm ci
+npm install
 ```
 
-`npm ci` installs the exact dependency versions recorded by this project.
+`npm install` installs the website dependencies.
 Wait for installation to finish successfully.
 
 Create your local settings file:

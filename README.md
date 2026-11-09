@@ -96,7 +96,7 @@ Open a **normal PowerShell window**, without administrator mode, and check:
 
 ```powershell
 node --version
-npm.cmd --version
+npm --version
 git --version
 code --version
 sui --version
@@ -106,9 +106,6 @@ sui --version
 Use a supported Node.js LTS version, such as Node 24 or newer.
 Do not continue with a command that says "not recognized" or fails to start.
 See [Troubleshooting](#troubleshooting).
-
-We use `npm.cmd` in PowerShell to avoid the common "npm.ps1 cannot be loaded" error.
-It runs the same npm tool without changing your computer's script policy.
 
 ### Use the correct folder in VS Code
 
@@ -219,10 +216,10 @@ Right-click `web` in VS Code and select **Open in Integrated Terminal**.
 
 ```powershell
 Get-Location
-npm.cmd ci
+npm install
 ```
 
-`npm.cmd ci` installs the exact dependency versions recorded by this project.
+`npm install` installs the website dependencies.
 Wait for installation to finish successfully.
 
 Create your local settings file:
@@ -259,7 +256,7 @@ A square photo works well.
 **Terminal folder: `web`.**
 
 ```powershell
-npm.cmd run dev
+npm run dev
 ```
 
 Open the **Local** URL printed in the terminal.
@@ -555,8 +552,8 @@ For a local check, stop any running development server with **Ctrl+C**.
 Open a terminal in `web` and run:
 
 ```powershell
-npm.cmd run build
-npm.cmd run preview
+npm run build
+npm run preview
 ```
 
 Open the local URL printed by the preview command.
@@ -611,6 +608,9 @@ Remove recovery phrases and private keys before sharing any output.
 
 Close all PowerShell and VS Code windows, then reopen them.
 Run the version checks in [Prerequisites](#prerequisites) again.
+
+If PowerShell says `npm.ps1 cannot be loaded because running scripts is disabled`, use `npm.cmd` for that command, such as `npm.cmd install`.
+This runs npm without changing PowerShell's execution policy.
 
 If `sui` still fails, run:
 
