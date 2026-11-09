@@ -53,6 +53,6 @@ ehthumbs.db
 
 # Specs (local planning docs)
 spec/
-*.md
-.audit/check-beginner-guides.mjs
-.audit/stage-uphsl-rebrand.patch
+
+# Local agent audit files
+.audit/
