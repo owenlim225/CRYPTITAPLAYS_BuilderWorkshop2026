@@ -1,13 +1,23 @@
-![Cryptita Plays — Builder Workshop banner](docs/readme/01-banner.png)
+![Cryptita Plays workshop banner](docs/readme/01-banner.png)
 
-# Cryptita Plays — Builder Workshop
+# Cryptita Plays Builder Workshop
 
-**Marinduque State University student starter** — The `main` branch contains this edition with both challenges unfinished. Fork or clone `main`, then follow the [MSU challenges](docs/workshops/marinduque-state-university.md).
+Build your own online profile card and publish it on Sui.
+You will copy the project, add your photo, put the website online, and create the profile data that the website displays.
+No previous blockchain experience is required.
 
-See [university editions](docs/workshops/editions.md) for preserved earlier workshops and the MMCL archive.
+This is the **University of Perpetual Help System Laguna 2026 workshop guide**.
+The `main` branch includes two frontend exercises: remove the returning insects and redesign the card.
+Follow the [frontend challenges](docs/workshops/marinduque-state-university.md) after you can run the website in Step 3.
+These exercises reuse the earlier MSU challenge guide.
+Those exercises work with an empty card and do not require SUI.
 
+**This guide is for Windows and PowerShell only.**
+Mac users should use the complete [macOS guide](docs/workshops/macos.md).
+See [university editions](docs/workshops/editions.md) for earlier workshops.
 
-<!-- Marinduque State University community partners -->
+## Community partners
+
 <table align="center" cellspacing="12">
   <tr>
     <td align="center" valign="middle">
@@ -32,506 +42,443 @@ See [university editions](docs/workshops/editions.md) for preserved earlier work
   </tr>
 </table>
 
----
+## Prerequisites
 
-Ready to move from learning Web3 concepts to actually building and deploying on-chain? This repo is your workshop companion: you'll set up a development environment, publish a smart contract, connect a website to on-chain data, and deploy your application.
+You need a Windows 10 or 11 computer, internet access, and permission to install software.
+These instructions use the Windows x64 Sui package.
+For a school-managed computer without administrator access, ask your IT administrator to install the tools first.
 
+Create a [GitHub account](https://github.com/signup).
+GitHub stores your copy of the project.
+Create a [Vercel account](https://vercel.com/signup) using **Continue with GitHub**.
+Vercel puts your website online.
 
-This workshop project pairs a **Sui Move** `BuilderCard` **package** with a **read-only Vite/React site**.
+### Install the tools with PowerShell
 
-You publish and create your card with the **Sui CLI**, then set one object ID so the website can read on-chain profile data over **Sui GraphQL**.
+A terminal is a window where you type commands.
+PowerShell is the terminal shell used throughout this guide.
 
-There is **no browser wallet**, **no create form**, and **no on-page transaction signing**. Writes happen in the terminal only.
+1. Open **Start** and search for **Windows PowerShell**.
+2. Right-click it and select **Run as administrator**.
+3. Select **Yes** when Windows asks for permission.
+4. Check whether Chocolatey is installed:
 
-Screenshots in this guide are numbered to match the section they belong to (for example **Figure 1.1** sits under Step 1).
+```powershell
+choco --version
+```
 
----
+If you see a version number, skip the next code block.
+If PowerShell says that `choco` is not recognized, run this block to install Chocolatey.
+It downloads and runs the [official Chocolatey installer](https://docs.chocolatey.org/en-us/choco/setup/).
+The execution-policy change applies only to this PowerShell window.
 
+```powershell
+Set-ExecutionPolicy Bypass -Scope Process -Force
+[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
+iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+```
 
+Close the window and open **Windows PowerShell as administrator** again.
+Run each line below and wait for it to finish before running the next:
+
+```powershell
+choco --version
+choco install nodejs-lts git vscode sui -y
+```
+
+This installs Node.js and npm for the website, Git for downloading and saving code, VS Code for editing files, and the Sui command-line interface (CLI).
+The `-y` option accepts the package installation prompts.
+If a package fails, stop and read the error before continuing.
+
+Close all PowerShell and VS Code windows.
+If an installer requests a Windows restart, restart first.
+Open a **normal PowerShell window**, without administrator mode, and check:
+
+```powershell
+node --version
+npm.cmd --version
+git --version
+code --version
+sui --version
+```
+
+**Check:** all five commands print version information.
+Use a supported Node.js LTS version, such as Node 24 or newer.
+Do not continue with a command that says "not recognized" or fails to start.
+See [Troubleshooting](#troubleshooting).
+
+We use `npm.cmd` in PowerShell to avoid the common "npm.ps1 cannot be loaded" error.
+It runs the same npm tool without changing your computer's script policy.
+
+### Use the correct folder in VS Code
+
+Copy only the text inside a code block.
+Press **Enter** to run a command and wait for the prompt to return.
+Replace examples such as `YOUR_GITHUB_USERNAME` with your own values.
+Keep quotation marks when shown.
+If a command fails, fix that step before moving on.
+
+Open the project folder in VS Code, then select **Terminal > New Terminal**.
+If the terminal is not PowerShell, use the arrow beside the terminal's **+** button to select **PowerShell**.
+
+A *directory* means a folder.
+The *project root* is the folder containing both `web` and `move`.
+
+```powershell
+Get-Location
+Get-ChildItem
+```
+
+The first command shows your current folder.
+The second lists its contents.
+`cd web` enters the website folder.
+`cd ..` moves up one folder.
+
+**To open a terminal in the right folder every time:**
+
+1. In VS Code's Explorer panel, right-click the `web` or `move` folder.
+2. Select **Open in Integrated Terminal**.
+3. Run `Get-Location` and check that the path ends in that folder's name.
+
+When a step says **project root**, right-click the top project folder and select **Open in Integrated Terminal**.
+If that option is unavailable, right-click the project folder and select **Copy Path**.
+Enter `Set-Location "PASTE_THE_COPIED_PATH_HERE"`, replacing the example with the copied path.
+Each terminal has its own current folder.
+Opening a file does not change the terminal's folder.
 
 ## Contents
 
-1. [Essential resources](#essential-resources)
-2. [What you build](#what-you-build)
-3. [Prerequisites](#prerequisites)
-4. [Repository layout](#repository-layout)
-5. [Step-by-step workshop path](#step-by-step-workshop-path)
-  - [Star and fork on GitHub](#star-and-fork-on-github)
-  - [Step 1: Clone, install, get Mainnet SUI](#step-1-clone-your-fork-open-vs-code-install-frontend-get-mainnet-sui)
-  - [Step 2: Replace your profile photo](#step-2-replace-your-profile-photo)
-  - [Step 3: Run the site locally](#step-3-run-the-site-locally-empty-card-is-ok)
-  - [Step 4: Deploy the website](#step-4-deploy-the-website-and-copy-your-url)
-  - [Step 5: Build and test the Move package](#step-5-build-and-test-the-move-package)
-  - [Step 6: Publish the package on Mainnet](#step-6-publish-the-package-on-mainnet)
-  - [Step 7: Create your BuilderCard](#step-7-create-your-buildercard)
-  - [Step 8: Point the frontend at your object](#step-8-point-the-frontend-at-your-object)
-  - [Step 9: Rebuild and verify](#step-9-rebuild-and-verify)
-  - [Step 10: Optional reset](#step-10-optional-replace-or-reset-the-displayed-card)
-6. [Package ID vs Object ID](#package-id-vs-object-id)
-7. [Environment variables](#environment-variables)
-8. [Troubleshooting](#troubleshooting)
-9. [Optional Testnet practice](#optional-testnet-practice)
-10. [License](#license)
+- [Prerequisites](#prerequisites)
+- [Step-by-step workshop path](#step-by-step-workshop-path)
+  - [Step 1: Copy the project to your computer](#step-1)
+  - [Step 2: Prepare the website and your photo](#step-2)
+  - [Step 3: Run the website on your computer](#step-3)
+  - [Step 4: Put the website online](#step-4)
+  - [Step 5: Set up your Sui address](#step-5)
+  - [Step 6: Build and publish your card program](#step-6)
+  - [Step 7: Create your personal card](#step-7)
+  - [Step 8: Connect the website to your card](#step-8)
+  - [Step 9: Check your finished website](#step-9)
+- [Essential resources](#essential-resources)
+- [Troubleshooting](#troubleshooting)
+- [Change or reset the displayed card](#change-or-reset-the-displayed-card)
+- [License](#license)
 
----
-
-
-
-## Essential resources
-
-
-| Resource                  | Link / path                                                                                                                          |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| Node.js LTS               | [https://nodejs.org/](https://nodejs.org/)                                                                                           |
-| Sui CLI install           | [https://docs.sui.io/guides/developer/getting-started/sui-install](https://docs.sui.io/guides/developer/getting-started/sui-install) |
-| Suiscan (Mainnet)         | [https://suiscan.xyz/mainnet](https://suiscan.xyz/mainnet)                                                                           |
-| Builder Registry (shared) | [https://github.com/Cryptita-Plays/cryptita-builder-registry](https://github.com/Cryptita-Plays/cryptita-builder-registry)           |
-| Upstream workshop repo    | [https://github.com/owenlim225/CRYPTITAPLAYS_BuilderWorkshop2026](https://github.com/owenlim225/CRYPTITAPLAYS_BuilderWorkshop2026)   |
-| QR code generator         | [https://www.qr-code-generator.com/solutions/text-qr-code/](https://www.qr-code-generator.com/solutions/text-qr-code/)               |
-| This repo layout          | `move/` (contract), `web/` (frontend), `spec/` (detailed specs)                                                                      |
-| Profile photo file        | `web/public/assets/profile.png`                                                                                                      |
-| Frontend env template     | `web/.env.example`                                                                                                                   |
-
-
-
-
-### Quick command cheat sheet
-
-```bash
-# Toolchain
-sui --version
-sui client active-env
-sui client active-address
-sui client balance
-
-# Move
-cd move
-sui move build
-sui move test
-sui client publish --gas-budget 100000000
-
-# Frontend
-cd web
-npm i
-npm run dev
-npm run lint
-npm run test
-npm run build
-npm run preview
-```
-
----
-
-
-
-## What you build
-
-1. **Move package** (`move/`) — `builder_card` module with an owned `BuilderCard`, Display metadata, and `create_builder_card` (builder number claimed automatically from the shared registry).
-2. **Static website** (`web/`) — single-viewport homepage that reads one on-chain object, shows your profile photo from `web/public/assets/profile.png`, and exports the card client-side. The GIF button creates a looping 1600 × 1600 animation using the shared card faces and `web/public/assets/workshop-export.png`. The square artwork scales to fill the output without cropping or padding. GIF encoding uses `gifenc` in a browser worker. The Camera button below it downloads a 1080 × 1350 PNG showing both card faces. Neither export uploads data to an external service.
-
-The LinkedIn button opens a share for your site in the visitor's signed-in LinkedIn account and copies the workshop deployment caption with that site's URL. To tag [Cryptita Plays](https://www.linkedin.com/company/cryptitaplays/posts/), [GrantiX](https://www.linkedin.com/company/grantix/home/), and [BingX](https://www.linkedin.com/company/bingxofficial/home/), replace each plain-text `@` name by selecting the matching page from LinkedIn's suggestions after pasting; a website share link cannot create mentions automatically. The visitor reviews and publishes the post in LinkedIn.
-
-
-
-### How data flows
-
-```text
-1. Replace profile.png
-2. Deploy website  →  get HTTPS URL
-3. Publish Move package  →  Package ID
-4. Call create_builder_card  →  Object ID  (+ auto builder_no from registry)
-5. Set VITE_PORTFOLIO_OBJECT_ID in web/.env
-6. Rebuild / redeploy site  →  card fills from chain; status dot turns green
-```
-
----
-
-
-
-## Prerequisites
-
-1. Install [Node.js LTS](https://nodejs.org/).
-2. Install [Sui CLI](https://docs.sui.io/guides/developer/getting-started/sui-install) (Move edition 2024).
-3. Create a **Mainnet** Sui address and obtain SUI from workshop facilitators (see workshop path below).
-4. Have a GitHub account and (for hosting) a Vercel account.
-
-
-
-### Verify Sui CLI
-
-```bash
-sui --version
-```
-
-![Sui CLI version output](docs/readme/02-sui-version.png)
-
-**Figure P.1** — Terminal output of `sui --version`. Expected: your installed version string (for example `sui 1.78.0`).
-
-On Windows, if the command is not recognized or `sui.exe` fails before showing a version, follow the [Sui CLI troubleshooting steps](#sui-cli--gas). These are different failures and have different fixes.
-
-### Switch to Mainnet
-
-```bash
-sui client switch --env mainnet
-```
-
-If `mainnet` is missing:
-
-```bash
-sui client new-env --alias mainnet --rpc https://fullnode.mainnet.sui.io:443
-sui client switch --env mainnet
-```
-
-Do **not** use Testnet for the workshop production path. Optional Testnet practice is listed at the end of this guide.
-
----
-
-
-
-## Repository layout
-
-```text
-docs/     Contains image files used for this README
-move/     Sui Move package (builder_card)
-web/      Vite + React read-only frontend
-```
-
----
 ## Step-by-step workshop path
 
-Follow these steps in order. Each screenshot is captioned so you can match your screen to the expected result.
+Complete these steps in order.
+Keep a private note with your website URL, Package ID, and BuilderCard Object ID.
+You will receive each value in a later step.
 
----
-### Star and fork on GitHub
+The website displays data but cannot create or edit blockchain records.
+You create those records with Sui commands.
+*Mainnet* is Sui's real network.
+*Gas* is the SUI fee paid to run a transaction.
 
-1. Open the upstream repo: [https://github.com/owenlim225/CRYPTITAPLAYS_BuilderWorkshop2026](https://github.com/owenlim225/CRYPTITAPLAYS_BuilderWorkshop2026)
-2. Click ⭐ **Star** on the upstream repo
+<h3 id="step-1"><img src="docs/readme/step-1.svg" alt="Step 1: Copy the project to your computer"></h3>
 
-![GitHub star on the upstream repo](docs/readme/03-github-star.png)
+A *fork* is your own copy of a project on GitHub.
+*Clone* means download that copy to your computer.
 
-**Figure 0.1** — Star the upstream workshop repository on GitHub.
+1. Open the [workshop repository](https://github.com/owenlim225/CRYPTITAPLAYS_BuilderWorkshop2026).
+2. Click **Fork**.
+3. Set **Owner** to your account.
+4. Name the repository `CRYPTITAPLAYS_BuilderWorkshop2026_LastName`, replacing `LastName` with your surname.
+5. Select **Copy the main branch only**, then **Create fork**.
+6. On your fork's page, select **Code > HTTPS** and copy the URL.
 
-1. Click **Fork**.
-  - **Owner:** your GitHub account
-  - **Repository name:** `CRYPTITAPLAYS_BuilderWorkshop2026_LastName` (replace `LastName` with your surname, e.g. `CRYPTITAPLAYS_BuilderWorkshop2026_Lingao`)
-  - Copy the **main** branch only
-  - Click **Create fork**
+![GitHub fork settings](docs/readme/04-github-fork.png)
 
-![GitHub create fork form](docs/readme/04-github-fork.png)
+Open a normal PowerShell window.
+Create a folder for your workshop projects:
 
-**Figure 0.2** — Create-fork form with your account as owner, the required repo name, and the `main` branch selected.
+```powershell
+New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\workshops"
+Set-Location "$env:USERPROFILE\workshops"
+```
 
----
-<div style="background-color: #a11ff1; color: #ffffff; padding: 8px 12px; margin: 24px 0;">
-  <h3 id="step-1-clone-your-fork-open-vs-code-install-frontend-get-mainnet-sui" style="color: #ffffff; margin: 0;">Step 1: Clone your fork, open VS Code, install frontend, get Mainnet SUI</h3>
-</div>
+Replace the URL and folder name below with your fork's values.
+Run the lines one at a time:
 
-1. Open a terminal.
-2. Clone **your fork** (not the upstream repo), then open it in VS Code:
-
-```bash
+```powershell
 git clone https://github.com/YOUR_GITHUB_USERNAME/CRYPTITAPLAYS_BuilderWorkshop2026_LastName.git
 cd CRYPTITAPLAYS_BuilderWorkshop2026_LastName
 code .
 ```
 
-VS Code should open the project:
+The dot in `code .` means "open this folder in VS Code."
+If VS Code asks whether you trust the project, review the source and trust your workshop copy.
 
-![VS Code opened on the cloned workshop repo](docs/readme/05-vscode-opened.png)
+**Check:** VS Code's Explorer shows `web`, `move`, and `README.md`.
+If you only see the files inside `web`, use **File > Open Folder** to open its parent project folder.
 
-**Figure 1.1** — Workshop repo opened in VS Code after cloning your fork.
+<h3 id="step-2"><img src="docs/readme/step-2.svg" alt="Step 2: Prepare the website and your photo"></h3>
 
-1. In VS Code, open a new terminal with **Ctrl+Shift+backtick** (Terminal → New Terminal; backtick is the same key as `~`).
-2. In the project terminal, switch to `web/` and run `npm i` first, before any other frontend command. Then copy the env file. Use the command for your terminal: Git Bash uses `cp`; PowerShell uses `Copy-Item`.
-
-**Git Bash / macOS / Linux:**
-
-```bash
-cd web
-npm i
-cp .env.example .env
-```
-
-**PowerShell:**
+**Terminal folder: `web`.**
+Right-click `web` in VS Code and select **Open in Integrated Terminal**.
 
 ```powershell
-cd web
-npm i
+Get-Location
+npm.cmd ci
+```
+
+`npm.cmd ci` installs the exact dependency versions recorded by this project.
+Wait for installation to finish successfully.
+
+Create your local settings file:
+
+```powershell
 Copy-Item .env.example .env
 ```
 
-![npm install and copied .env in VS Code](docs/readme/06-npm-install-env.png)
+Run this copy command only the first time.
+If `web/.env` already exists, keep it.
+In VS Code, open `web/.env` and confirm:
 
-**Figure 1.2** — `npm i` finished and `web/.env` copied from `.env.example`.
-
-The template starts with an empty `VITE_PORTFOLIO_OBJECT_ID=`. Leave it empty in your local `web/.env` until you create a BuilderCard. `web/.env.example` already sets `VITE_SUI_NETWORK=mainnet`.
-
-1. Confirm you are on Mainnet:
-
-```bash
-sui client active-env
-sui client switch --env mainnet
+```env
+VITE_PORTFOLIO_OBJECT_ID=
+VITE_SUI_NETWORK=mainnet
+VITE_CHAIN=sui
 ```
 
-1. If you do not have an address yet:
+Leave the Object ID empty for now.
+Save with **Ctrl+S**.
 
-```bash
-sui client new-address ed25519
-sui client active-address
+Replace `web/public/assets/profile.png` with your photo.
+Use an actual PNG image and keep the exact name `profile.png`.
+Renaming a JPG file to `.png` does not convert the image.
+For a JPG, open it in Paint and use **File > Save as > PNG picture**.
+A square photo works well.
+
+![Profile photo location in VS Code](docs/readme/08-profile-file-tree.png)
+
+**Check:** the file is inside `web/public/assets` and is named `profile.png`, not `profile.png.png`.
+
+<h3 id="step-3"><img src="docs/readme/step-3.svg" alt="Step 3: Run the website on your computer"></h3>
+
+**Terminal folder: `web`.**
+
+```powershell
+npm.cmd run dev
 ```
 
-1. Copy your address (starts with `0x`).
-2. Open [https://www.qr-code-generator.com/solutions/text-qr-code/](https://www.qr-code-generator.com/solutions/text-qr-code/) and paste your address to generate a QR code.
+Open the **Local** URL printed in the terminal.
+It is usually `http://localhost:5173`, but the number can change if that port is busy.
 
-![QR code generated from a Sui address](docs/readme/07-qr-code-address.png)
+**Check:** your photo appears on the card.
+Blank profile fields and a grey status dot are expected because you have not created your card data yet.
+The starter's returning insects are part of the [school exercises](docs/workshops/marinduque-state-university.md).
 
-**Figure 1.3** — QR code generated from your Sui Mainnet address, ready to show a facilitator.
+Keep this terminal open while you use the local website.
+To stop the website, click inside the terminal and press **Ctrl+C**.
+If PowerShell asks to terminate the batch job, type `Y` and press **Enter**.
+You can open another terminal for later steps.
 
-1. Show the QR code to a **technical facilitator** and ask for **Mainnet SUI** for gas. Do **not** use the Testnet faucet for workshop production.
-2. Verify balance:
+<h3 id="step-4"><img src="docs/readme/step-4.svg" alt="Step 4: Put the website online"></h3>
 
-```bash
-sui client balance
+*Deploy* means publish the website so other people can open it.
+First, upload your photo change to your GitHub fork.
+
+**Terminal folder: project root.**
+
+```powershell
+Get-Location
+git status
+git branch --show-current
 ```
 
----
-<div style="background-color: #a11ff1; color: #ffffff; padding: 8px 12px; margin: 24px 0;">
-  <h3 id="step-2-replace-your-profile-photo" style="color: #ffffff; margin: 0;">Step 2: Replace your profile photo</h3>
-</div>
+**Check:** the branch is `main`.
+If it is not, reopen the fork you cloned in Step 1 before continuing.
 
-1. Replace `web/public/assets/profile.png` with your portrait.
+Set the name and email that Git attaches to commits in this project.
+Replace both examples.
+Use your GitHub account email, or the private commit email shown in **GitHub Settings > Emails**.
 
-![profile.png selected in the VS Code file tree](docs/readme/08-profile-file-tree.png)
-
-**Figure 2.1** — `web/public/assets/profile.png` selected in the VS Code file tree. Keep this exact filename.
-
-1. Keep the **exact filename** `profile.png`.
-2. Prefer a square or portrait photo; it is cropped to the card frame.
-
----
-<div style="background-color: #a11ff1; color: #ffffff; padding: 8px 12px; margin: 24px 0;">
-  <h3 id="step-3-run-the-site-locally-empty-card-is-ok" style="color: #ffffff; margin: 0;">Step 3: Run the site locally (empty card is OK)</h3>
-</div>
-
-```bash
-npm run dev
-```
-
-Open [http://localhost:5173](http://localhost:5173)
-
-Expected:
-
-![Local site showing placeholder BuilderCard](docs/readme/09-localhost-placeholder.png)
-
-**Figure 3.1** — Local site at `localhost:3000` with placeholder card fields and a grey status dot. Empty object ID is expected at this stage.
-
-- Card shows placeholders (`—` / `Builder name`)
-- Status dot next to BUILDER NO. is **grey**
-- Photo still shows `profile.png` from local assets
-
----
-<div style="background-color: #a11ff1; color: #ffffff; padding: 8px 12px; margin: 24px 0;">
-  <h3 id="step-4-deploy-the-website-and-copy-your-url" style="color: #ffffff; margin: 0;">Step 4: Deploy the website and copy your URL</h3>
-</div>
-
-Deploy `web/` first so you have a public HTTPS URL for the on-chain `website_url` argument.
-
-Vercel deploys from your GitHub fork, not directly from the files on your computer. Before importing the project, open a new terminal at the repository root and push the profile photo you replaced in Step 2:
-
-```bash
+```powershell
+git config user.name "Your Name"
+git config user.email "YOUR_GITHUB_EMAIL"
 git add web/public/assets/profile.png
 git commit -m "Customize profile photo"
 git push origin main
 ```
 
-If your updated `profile.png` is already visible in your GitHub fork, skip these commands.
+A *commit* saves a named set of changes.
+*Push* uploads those commits.
+Complete the GitHub browser sign-in if Git requests it.
+If Git says "nothing to commit", check whether the correct photo is already on your fork.
 
-**Vercel settings for the first deployment:**
+Open your fork on GitHub and confirm that `web/public/assets/profile.png` is your photo.
+Vercel builds from GitHub, so files saved only on your computer will not appear online.
+If you completed the school exercises, follow their save-and-push instructions before deploying.
 
+1. Open [Vercel's new-project page](https://vercel.com/new) and sign in with GitHub.
+2. Import your fork.
+3. If your fork is missing, use **Adjust GitHub App Permissions** to grant Vercel access to it.
+4. Set **Root Directory** to `web`.
+5. Confirm **Framework Preset** is Vite, **Build Command** is `npm run build`, and **Output Directory** is `dist`.
+6. Under **Environment Variables**, add `VITE_SUI_NETWORK` with value `mainnet` and `VITE_CHAIN` with value `sui`.
+7. Leave `VITE_PORTFOLIO_OBJECT_ID` unset for now.
+8. Click **Deploy** and wait for success.
+9. Open the project dashboard and copy the production domain, such as `https://your-project.vercel.app`.
 
-| Setting          | Value           |
-| ---------------- | --------------- |
-| Root directory   | `web`           |
-| Build command    | `npm run build` |
-| Output directory | `dist`          |
+![Select web as the Vercel root directory](docs/readme/12-vercel-root-web.png)
 
-Do not add environment variables yet. You will add the completed `web/.env` in Step 8, after creating your BuilderCard and receiving its Object ID.
+Use the stable project domain.
+Do not copy a preview URL with a random deployment identifier.
+Save the URL in your notes without a final `/`.
 
+**Check:** the URL opens in a private browser window without a Vercel login, shows Mainnet, and displays your photo.
+The profile fields remain blank until Step 8.
+If access is blocked, review **Deployment Protection** in the project's settings and allow public access to the production site.
 
-1. Go to [https://vercel.com/new](https://vercel.com/new).
-2. Click **Continue with GitHub**.
+<h3 id="step-5"><img src="docs/readme/step-5.svg" alt="Step 5: Set up your Sui address"></h3>
 
-![Vercel Continue with GitHub](docs/readme/10-vercel-continue-github.png)
+**Terminal folder: project root.**
+Sui account commands work from any folder.
 
-**Figure 4.1** — Vercel new-project screen. Sign in with GitHub to import your fork.
+Your Sui *address* is the public identifier that receives SUI and owns your card.
+A *recovery phrase* or private key controls that address.
+Keep it private and backed up.
+Never put it in GitHub, Vercel, website settings, a QR code, or a screenshot you share.
 
-1. **Import** your forked repo (`CRYPTITAPLAYS_BuilderWorkshop2026_LastName`).
+```powershell
+sui client
+```
 
-![Vercel import forked repo](docs/readme/11-vercel-import-fork.png)
+If asked to create a configuration, answer `y`.
+Some CLI versions also ask for a server URL, environment alias, and key scheme.
+If those prompts appear, use these answers:
 
-**Figure 4.2** — Import your forked workshop repository from the GitHub list.
+- Server URL: `https://fullnode.mainnet.sui.io:443`.
+- Environment alias: `mainnet`.
+- Key scheme: `0` for ed25519.
 
-1. Open **Root Directory**, select `web`, then **Continue**.
+If the CLI creates a default Testnet configuration automatically, continue below.
+If you already have a configuration, `sui client` may show help instead.
 
-![Vercel root directory set to web](docs/readme/12-vercel-root-web.png)
+List your configured networks:
 
-**Figure 4.3** — Root Directory set to `web` so Vercel builds the frontend, not the repo root.
+```powershell
+sui client envs
+```
 
-1. Click **Deploy**.
-2. When deployment finishes, click **Continue to Dashboard**.
+Only if `mainnet` is missing, add it:
 
-![Vercel deployment congratulations](docs/readme/13-vercel-congratulations.png)
+```powershell
+sui client new-env --alias mainnet --rpc https://fullnode.mainnet.sui.io:443
+```
 
-**Figure 4.4** — First deployment succeeded. Continue to the project dashboard.
+Switch to Mainnet and check your address:
 
-1. From the project overview or the successful production deployment, copy the stable production domain (for example, `https://your-project.vercel.app`). Do not use a deployment-specific URL containing a random identifier because that URL remains tied to the first build.
+```powershell
+sui client switch --env mainnet
+sui client active-env
+sui client active-address
+```
 
-![Vercel deployment domains](docs/readme/19-vercel-copy-domain.png)
+If there is no active address, create one and select it.
+Replace `0xYOUR_ADDRESS` with the address from the creation output:
 
-**Figure 4.5** — Copy the stable production HTTPS domain. You need it as `website_url` in Step 7.
+```powershell
+sui client new-address ed25519
+sui client switch --address 0xYOUR_ADDRESS
+sui client active-address
+```
 
-Open the URL in a private or signed-out browser window and confirm that it loads without asking for Vercel access. The site can deploy without Vercel environment variables because an empty Object ID is supported. This first deployment is temporary: it shows the placeholder card and may show the frontend's default Testnet label. Do not create a Testnet card for it. In Step 8 you will add the completed Mainnet configuration and redeploy the same project at this same production domain.
+**Check:** the active network is `mainnet`, and the active address starts with `0x`.
 
----
+Give that **public address** to the workshop's technical facilitator to receive Mainnet SUI for transaction fees.
+If a QR code is requested, paste only the public address into the [text QR generator](https://www.qr-code-generator.com/solutions/text-qr-code/).
+For study outside an event, you must arrange Mainnet funding before continuing.
+There is no free Mainnet faucet.
+You can still complete the local frontend exercises without funding.
 
+```powershell
+sui client balance
+```
 
+**Check:** the command returns a positive SUI balance.
+If it returns zero, wait for funding.
+If it returns an error, use [Troubleshooting](#troubleshooting).
+A positive balance alone does not guarantee enough gas for every transaction.
 
-<div style="background-color: #a11ff1; color: #ffffff; padding: 8px 12px; margin: 24px 0;">
-  <h3 id="step-5-build-and-test-the-move-package" style="color: #ffffff; margin: 0;">Step 5: Build and test the Move package</h3>
-</div>
+<h3 id="step-6"><img src="docs/readme/step-6.svg" alt="Step 6: Build and publish your card program"></h3>
 
-Go back to VS Code.
+**Terminal folder: `move`.**
+Right-click `move` in VS Code and select **Open in Integrated Terminal**.
 
-Open a new terminal with **Ctrl+Shift+backtick** (Terminal → New Terminal).
-
-![VS Code with an integrated terminal open](docs/readme/20-vscode-terminal.png)
-
-**Figure 5.1** — New integrated terminal in VS Code, ready to build the Move package.
-
-Then run:
-
-```bash
-cd move
+```powershell
+Get-Location
 sui move build
 sui move test
 ```
 
-![sui move build and test output](docs/readme/21-sui-move-build-test.png)
+*Build* checks and prepares the Move program.
+*Test* runs its automated checks.
+**Check:** both commands succeed before you publish.
 
-**Figure 5.2** — Successful `sui move build` and `sui move test` output. Fix any compile errors before publishing.
+Publishing puts the program on Mainnet and spends SUI.
+Confirm your network and funded address immediately before publishing:
 
-**Linux / macOS —** `Move.lock` **directory error**
-
-If `sui move build` fails because `Move.lock` is a directory:
-
-```bash
-cd move
-rm Move.lock
-sui move build
+```powershell
+sui client active-env
+sui client active-address
+sui client balance
 ```
 
----
+Continue only when the network is `mainnet` and the address is the one you funded.
 
-
-
-<div style="background-color: #a11ff1; color: #ffffff; padding: 8px 12px; margin: 24px 0;">
-  <h3 id="step-6-publish-the-package-on-mainnet" style="color: #ffffff; margin: 0;">Step 6: Publish the package on Mainnet</h3>
-</div>
-
-```bash
-sui client switch --env mainnet   # make sure you're on mainnet
-sui client active-address         # must be funded with Mainnet SUI
-sui client publish
+```powershell
+sui client publish --gas-budget 100000000
 ```
 
-![sui client publish on Mainnet](docs/readme/22-sui-publish-mainnet.png)
+The gas budget is a maximum, not a quoted fee.
+Wait for the transaction result.
+If the connection drops or the result is uncertain, check your address's transactions on [Suiscan](https://suiscan.xyz/mainnet) before retrying.
+Repeating a successful publish spends more SUI.
 
-**Figure 6.1** — `sui client publish` running on Mainnet. This screenshot shows the beginning of the output; the Package ID appears farther down after the command completes.
+Find **Published Objects** in the successful output.
+Copy its **PackageID** and save it as **Package ID** in your notes.
+Do not copy the transaction digest.
 
-The screenshot above shows the start of publish output. Scroll farther to **Published Objects** to find `PackageID`:
+![Where to find the Package ID](docs/readme/24-package-id-to-call.svg)
 
-![Diagram mapping PackageID in Published Objects to the call's --package option](docs/readme/24-package-id-to-call.svg)
+**Check:** you have a Package ID beginning with `0x`.
+This ID identifies your published program.
+It is not the ID of your personal card.
 
-**Figure 6.2** — Illustrative publish output: copy `PackageID` under **Published Objects** into `--package` in Step 7. The registry is the first `--args` value; the created card ID is used later in `VITE_PORTFOLIO_OBJECT_ID`. Do not copy the transaction digest as the Package ID.
+<h3 id="step-7"><img src="docs/readme/step-7.svg" alt="Step 7: Create your personal card"></h3>
 
-1. From **Published Objects**, copy the **Package ID** (the `PackageID` value, not `Digest`).
-2. Save it somewhere safe. You need it for `--package` in the next step.
+**Terminal folder: `move`.**
 
----
+Before running this command, review every profile value.
+The values become public on-chain, including the `about` text that the website does not display.
+This workshop has no edit or delete command for a created card.
+Do not enter information you do not want public.
 
+You will use three different IDs:
 
+| Value | Where it comes from | Where you use it |
+| --- | --- | --- |
+| Package ID | Your successful publish in Step 6 | After `--package` |
+| Registry object ID | Fixed workshop value below | First value after `--args` |
+| BuilderCard Object ID | Successful card creation in this step | Website settings in Step 8 |
 
-<div style="background-color: #a11ff1; color: #ffffff; padding: 8px 12px; margin: 24px 0;">
-  <h3 id="step-7-create-your-buildercard" style="color: #ffffff; margin: 0;">Step 7: Create your BuilderCard</h3>
-</div>
+Copy the following command into a temporary text editor first.
+Replace `0xYOUR_PACKAGE_ID`, every `Your ...` example, and the website URL.
+Replace the sample skills and workshop-learning description with your own text too.
+Adjust `PH` and `2026` if needed.
+Keep `2026` as this workshop's issue value.
+Use three or four skills separated by commas.
+Use your Step 4 website URL without a final `/`.
 
-Pass the **shared registry object** first, then **12 strings** in this exact order:
+The profile fields are ordered as follows:
+name, profession, program, country, specialization, building-since year, focus, community, skills, issue value, about, and website URL.
+Keep all twelve quoted values in that order.
+Do not change the long registry ID or add a builder number.
 
-
-| #  | Argument                                   | Example                                           | You change?                     |
-| -- | ------------------------------------------ | ------------------------------------------------- | ------------------------------- |
-| 1  | `registry` (shared object ID)              | Mainnet ID below                                  | **No**                          |
-| 2  | `builder_name`                             | `"Your Name"`                                     | **Yes**                         |
-| 3  | `profession`                               | `"Your Profession"`                               | **Yes**                         |
-| 4  | `program`                                  | `"Your Program"`                                  | **Yes**                         |
-| 5  | `country`                                  | `"PH"`                                            | **Yes**                         |
-| 6  | `specialization`                           | `"Your Specialization"`                           | **Yes**                         |
-| 7  | `building_since`                           | `"2026"`                                          | **Yes**                         |
-| 8  | `focus`                                    | `"Your Focus"`                                    | **Yes**                         |
-| 9  | `community`                                | `"Your Community"`                                | **Yes**                         |
-| 10 | `skills` (comma-separated)                 | `"Skill One, Skill Two, Skill Three"`             | **Yes (3–4 max)**               |
-| 11 | `issued`                                   | `"August 2026"`                                   | **No — use the workshop value** |
-| 12 | `about` (on-chain only; not shown on site) | `"A short description of your workshop learning."` | **Yes**                         |
-| 13 | `website_url` (no trailing slash)          | `"https://your-site.vercel.app"`                  | **Yes — your Step 4 URL**       |
-
-
-**Mainnet registry object ID (workshop production):**
-
-`0x297cb610c0c47edc1e12008812f28cd8a1f35f95bb406d45f4b76fa9fda2e04c`
-
-On create, the contract also stores:
-
-- `builder_no` — claimed automatically from the registry (`u64`)
-- `website_url` — shown as Suiscan / Display `link`
-- `photo_url` — derived as `{website_url}/assets/profile.png` for explorers
-
-Package `init` also creates **Display** metadata so Suiscan can show a human name, image, and site link.
-
-Copy your **Package ID** from Step 6 into `--package`. The fixed Mainnet **registry object ID** above is the first value after `--args`. After the call succeeds, put the newly created **BuilderCard Object ID** in `VITE_PORTFOLIO_OBJECT_ID`. These IDs have different roles and cannot be substituted for one another. The CLI supplies `ctx` automatically, and the registry assigns `builder_no`.
-
-Personalize only these **11 fields**: `builder_name`, `profession`, `program`, `country`, `specialization`, `building_since`, `focus`, `community`, `skills`, `about`, `website_url`. The current workshop guide uses `issued="August 2026"`; keep that cohort value. Replace every `Your ...` example and the site URL before calling Mainnet.
-
-#### Git Bash / macOS / Linux
-
-Replace `0xYOUR_PACKAGE_ID` with your publish output. A Bash continuation `\` must be the final character on its line, with no spaces after it.
-
-```bash
-sui client call \
-  --package 0xYOUR_PACKAGE_ID \
-  --module builder_card \
-  --function create_builder_card \
-  --args \
-    0x297cb610c0c47edc1e12008812f28cd8a1f35f95bb406d45f4b76fa9fda2e04c \
-    "Your Name" \
-    "Your Profession" \
-    "Your Program" \
-    "PH" \
-    "Your Specialization" \
-    "2026" \
-    "Your Focus" \
-    "Your Community" \
-    "Skill One, Skill Two, Skill Three" \
-    "August 2026" \
-    "A short description of your workshop learning." \
-    "https://your-site.vercel.app" \
-  --gas-budget 10000000
-```
-
-
-
-#### PowerShell
-
-Replace `0xYOUR_PACKAGE_ID` with your publish output. A PowerShell continuation backtick must be the final character on its line, with no spaces after it.
+In PowerShell, the backtick at the end of each continued line must have **no spaces after it**.
+Paste the whole edited block into the terminal:
 
 ```powershell
 sui client call `
@@ -549,35 +496,28 @@ sui client call `
     "Your Focus" `
     "Your Community" `
     "Skill One, Skill Two, Skill Three" `
-    "August 2026" `
+    "2026" `
     "A short description of your workshop learning." `
     "https://your-site.vercel.app" `
   --gas-budget 10000000
 ```
 
-If copying the PowerShell multiline command causes a continuation error, use this complete one-line fallback after replacing the same examples:
+If the call fails, fix the error before continuing.
+If the result is uncertain, check Suiscan before running the command again.
+Each successful call creates another card and spends SUI.
 
-```powershell
-sui client call --package 0xYOUR_PACKAGE_ID --module builder_card --function create_builder_card --args 0x297cb610c0c47edc1e12008812f28cd8a1f35f95bb406d45f4b76fa9fda2e04c "Your Name" "Your Profession" "Your Program" "PH" "Your Specialization" "2026" "Your Focus" "Your Community" "Skill One, Skill Two, Skill Three" "August 2026" "A short description of your workshop learning." "https://your-site.vercel.app" --gas-budget 10000000
-```
+In the successful output, find the **Created Objects** entry whose type ends with `::builder_card::BuilderCard`.
+Copy that entry's **ObjectID** into your notes as **BuilderCard Object ID**.
+The registry assigns your builder number automatically.
 
-1. From the call output, copy the **Created Object ID** of the new `BuilderCard`.
-2. Open Suiscan to verify fields and link:
-  - Mainnet: `https://suiscan.xyz/mainnet/object/0xYOUR_OBJECT_ID/fields`
+Open `https://suiscan.xyz/mainnet/object/0xYOUR_OBJECT_ID/fields` in your browser after replacing the example ID.
 
-![Suiscan BuilderCard object Fields tab](docs/readme/23-suiscan-object-fields.png)
+**Check:** Suiscan shows your name and the website URL you entered.
 
-**Figure 7.1** — Suiscan object Fields tab on Mainnet. Confirm your BuilderCard values and the website / image links.
+<h3 id="step-8"><img src="docs/readme/step-8.svg" alt="Step 8: Connect the website to your card"></h3>
 
----
-
-
-
-<div style="background-color: #a11ff1; color: #ffffff; padding: 8px 12px; margin: 24px 0;">
-  <h3 id="step-8-point-the-frontend-at-your-object" style="color: #ffffff; margin: 0;">Step 8: Point the frontend at your object</h3>
-</div>
-
-Now that Step 7 produced your BuilderCard Object ID, edit `web/.env`:
+In VS Code, open `web/.env`.
+Replace `0xYOUR_OBJECT_ID` below with the **BuilderCard Object ID** from Step 7:
 
 ```env
 VITE_PORTFOLIO_OBJECT_ID=0xYOUR_OBJECT_ID
@@ -585,252 +525,187 @@ VITE_SUI_NETWORK=mainnet
 VITE_CHAIN=sui
 ```
 
-Use the **created BuilderCard Object ID**, not the Package ID or transaction digest. Keep `VITE_SUI_NETWORK=mainnet` so the frontend reads from the same network where you created the object.
+Save the file.
+Do not use the Package ID or the registry ID here.
+The `.env` file contains website settings and stays on your computer.
+Do not commit it.
+All `VITE_*` settings are public in the built website, so never put secrets in them.
 
-1. In your Vercel project, open **Settings → Environment Variables**.
+Your local `.env` does not update Vercel automatically.
 
-![Vercel Environment Variables tab](docs/readme/14-vercel-env-tab.png)
+1. Open your project in Vercel.
+2. Select **Settings > Environment Variables**.
+3. Add `VITE_PORTFOLIO_OBJECT_ID` with your real BuilderCard Object ID.
+4. Confirm `VITE_SUI_NETWORK=mainnet` and `VITE_CHAIN=sui` are still present.
+5. Apply all three settings to **Production** and save.
+6. Open **Deployments**, select the latest production deployment's menu, and choose **Redeploy**.
+7. Wait for the new deployment to show **Ready**.
 
-**Figure 8.1** — Open the project's Environment Variables settings after creating the BuilderCard.
+![Vercel environment variable settings](docs/readme/14-vercel-env-tab.png)
 
-1. Click **Add Environment Variable**, select **Import .env**, and choose your completed local `web/.env` file.
+If Vercel offers **Import .env**, you can import your completed `web/.env` instead of typing its values.
+Confirm the existing network and chain settings are updated rather than duplicated.
 
-![Vercel Import .env](docs/readme/15-vercel-import-env.png)
+**Check:** all three settings exist for Production, and the redeployment succeeded.
+Changing settings does not update a website that was already built.
 
-**Figure 8.2** — Import the completed `.env` containing your real BuilderCard Object ID.
+<h3 id="step-9"><img src="docs/readme/step-9.svg" alt="Step 9: Check your finished website"></h3>
 
-1. Apply the variables to **Production**. You may also select Preview and Development if you want those Vercel environments to use the same card.
-2. Confirm these three variables are present, then save:
-   - `VITE_PORTFOLIO_OBJECT_ID=0xYOUR_OBJECT_ID`
-   - `VITE_SUI_NETWORK=mainnet`
-   - `VITE_CHAIN=sui`
+For a local check, stop any running development server with **Ctrl+C**.
+Open a terminal in `web` and run:
 
-![Saved Vercel environment variables](docs/readme/16a-vercel-object-id-menu.png)
-
-**Figure 8.3** — Confirm that all three variables were saved for Production. Values are masked in the dashboard; use your own Object ID rather than any example value.
-
-1. Redeploy the latest production deployment so Vite can include the new values in the build.
-
-![Vercel prompt to redeploy after env change](docs/readme/17-vercel-redeploy.png)
-
-**Figure 8.4** — Redeploy after saving the environment variables. Changes do not affect an already-built deployment.
-
-1. Open **Deployments** and wait until the new production deployment on `main` shows **Ready**.
-
-![Vercel Deployments list with Ready production builds](docs/readme/18-vercel-deployments-ready.png)
-
-**Figure 8.5** — The newly configured production deployment is ready.
-
-Vite reads `VITE_*` values at build time, so repeat this redeploy step whenever you change them in Vercel.
-
----
-
-
-
-<div style="background-color: #a11ff1; color: #ffffff; padding: 8px 12px; margin: 24px 0;">
-  <h3 id="step-9-rebuild-and-verify" style="color: #ffffff; margin: 0;">Step 9: Rebuild and verify</h3>
-</div>
-
-Verify the completed configuration locally:
-
-```bash
-cd web
-npm run build
-npm run preview
+```powershell
+npm.cmd run build
+npm.cmd run preview
 ```
 
-Also open the production URL you copied in Step 4. It now points to the Step 8 redeployment with your Mainnet configuration.
+Open the local URL printed by the preview command.
+Also open your stable Vercel URL in a private browser window.
 
-![alt text](docs/readme/25-result.jpg)
-Expected:
+Check both sites:
 
-1. Card fields fill from chain (name, profession, skills, issued, …).
-2. Status dot turns **green**.
-3. OBJECT ID / OWNER / NETWORK rows populate.
-4. Photo still comes from `/assets/profile.png` on your deployed site.
-5. Suiscan shows your `website_url` link and explorer image URL.
+- Your name, profession, and skills appear.
+- Your photo appears.
+- The network is Mainnet.
+- The Object ID matches your notes.
+- No loading or error message remains.
 
-After completing the workshop task, submit the completion form:
+A green dot alone is not proof that the card loaded.
+Check the actual profile fields too.
+On Suiscan, check that the website link and profile image open.
 
-<p align="center">
-  <a href="https://forms.gle/UDkMqhAU3z2ekFn66">
-    <img src="https://img.shields.io/badge/Complete_the_Workshop_Exercise-7C3AED?style=for-the-badge&amp;logo=googleforms&amp;logoColor=white" alt="Cryptita Plays — Builder Workshop Exercise Completion" height="48">
-  </a>
-</p>
+![Example of a completed BuilderCard website](docs/readme/25-result.jpg)
 
----
+You can export your loaded card with the GIF or Camera button.
+The Camera button downloads a PNG.
+These exports happen in your browser.
+The LinkedIn button opens a draft share for you to review and publish.
+To tag a partner, select its page from LinkedIn's suggestions after pasting the caption.
 
-<div style="background-color: #a11ff1; color: #ffffff; padding: 8px 12px; margin: 24px 0;">
-  <h3 id="step-10-optional-replace-or-reset-the-displayed-card" style="color: #ffffff; margin: 0;">Step 10: Optional: replace or reset the displayed card</h3>
-</div>
+Complete the [workshop submission form](https://forms.gle/UDkMqhAU3z2ekFn66).
 
-**Show a different card:** call `create_builder_card` again, update `VITE_PORTFOLIO_OBJECT_ID`, rebuild/redeploy. Old objects stay on-chain.
+## Essential resources
 
-**Reset local / template for other users (later):**
+- [School exercises](docs/workshops/marinduque-state-university.md): remove the insects and redesign the card.
+- [University editions](docs/workshops/editions.md): earlier workshop versions.
+- [Sui installation](https://docs.sui.io/getting-started/onboarding/sui-install) and [client setup](https://docs.sui.io/getting-started/onboarding/configure-sui-client).
+- [Chocolatey installation](https://docs.chocolatey.org/en-us/choco/setup/).
+- [Node.js](https://nodejs.org/) and [VS Code](https://code.visualstudio.com/).
+- [Suiscan Mainnet](https://suiscan.xyz/mainnet): inspect your transactions and card.
+- [Shared builder registry](https://github.com/Cryptita-Plays/cryptita-builder-registry).
+- [Vercel](https://vercel.com/): manage your hosted website.
 
-1. Clear `VITE_PORTFOLIO_OBJECT_ID=` in `web/.env` (and in Vercel).
-2. Keep `web/.env.example` empty for that value.
-3. Do not commit personal `.env` values.
-4. `move/build/` is gitignored and safe to delete; regenerate with `sui move build`.
-5. On-chain history cannot be deleted — “reset” means pointing the site at an empty or new object ID.
-
----
-
-
-
-## Package ID vs Object ID
-
-
-| ID                     | When you get it               | Used for                                   |
-| ---------------------- | ----------------------------- | ------------------------------------------ |
-| **Package ID**         | `sui client publish`          | CLI `--package` for `create_builder_card`  |
-| **Registry object ID** | Shared Cryptita registry      | First CLI arg (`&mut BuilderRegistry`)     |
-| **Object ID**          | `create_builder_card` success | `VITE_PORTFOLIO_OBJECT_ID` in the frontend |
-
-
-The website reads the **created BuilderCard object**, not the package.
-
----
-
-
-
-## Environment variables
-
-
-| Variable                   | Purpose                                                                        |
-| -------------------------- | ------------------------------------------------------------------------------ |
-| `VITE_PORTFOLIO_OBJECT_ID` | Created BuilderCard object ID. Empty = placeholder card + grey status dot      |
-| `VITE_SUI_NETWORK`         | `mainnet` for workshop production — selects GraphQL endpoint and NETWORK label |
-| `VITE_CHAIN`               | Visual chain theme (default `sui`)                                             |
-
-
-Vite inlines `VITE_*` at **build time**. After any `.env` change, rebuild and redeploy.
-
----
-
-
+The `web` folder contains the React website.
+The `move` folder contains the Sui Move program.
+The `docs` folder contains workshop guides and screenshots.
+The website reads your card from Sui through GraphQL.
+The photo stays in `web/public/assets/profile.png`.
 
 ## Troubleshooting
 
+Stop at the first failing step.
+Save the command, error message, and output of `Get-Location`.
+Remove recovery phrases and private keys before sharing any output.
 
+### A command is not recognized
 
-### Sui CLI / gas
+Close all PowerShell and VS Code windows, then reopen them.
+Run the version checks in [Prerequisites](#prerequisites) again.
 
-**Windows: `sui` is not recognized.** Check whether your terminal can locate the executable:
-
-**PowerShell:**
+If `sui` still fails, run:
 
 ```powershell
 Get-Command sui.exe -ErrorAction SilentlyContinue
-# Or:
-where.exe sui
 ```
 
-**Git Bash:**
-
-```bash
-command -v sui
-```
-
-If no executable path appears, locate `sui.exe` in File Explorer or the folder used by your installer. In PowerShell, try its full path (replace this example path with the one you found):
+If no path appears, check that Chocolatey reported a successful Sui installation.
+Retry only the failed package in an administrator PowerShell window:
 
 ```powershell
-& 'C:\path\to\sui.exe' --version
+choco install sui -y
 ```
 
-If that prints a version, add the **folder containing** `sui.exe` to your Windows **User Path**: search Windows for **Edit environment variables for your account** → under **User variables**, select **Path** → **Edit** → **New** → enter the folder path without `sui.exe` → **OK** through the dialogs. Fully close and reopen PowerShell or Git Bash and VS Code, including its integrated terminals. Run `sui --version` again. Avoid changing Path with `setx`.
+For an installation outside Chocolatey, find `sui.exe` and add its containing folder to your Windows **User Path**.
+Search Start for **Edit environment variables for your account**, then select **Path > Edit > New**.
+Add the folder, save, and restart all terminals.
+Do not delete existing Path entries.
 
-**Windows: `sui.exe` is found but fails to start.** If the full-path command or `sui --version` fails before printing a version, especially when Windows names `VCRUNTIME140.dll`, `VCRUNTIME140_1.dll`, or `MSVCP140.dll`, install Microsoft's [latest supported Visual C++ Redistributable (x64)](https://aka.ms/vc14/vc_redist.x64.exe). Open a new terminal and verify with `sui --version`. This is a conditional fix for those runtime errors; CLI builds can differ.
+If `code` is not recognized, you can still open VS Code from Start and use **File > Open Folder**.
 
-If you already have Chocolatey, you can install the same runtime from **Administrator PowerShell**:
+### Sui fails with a DLL error
+
+If Windows names `VCRUNTIME140.dll`, `VCRUNTIME140_1.dll`, or `MSVCP140.dll`, install the Microsoft runtime.
+In administrator PowerShell, run:
 
 ```powershell
 choco install vcredist140 -y
-sui --version
 ```
 
-| Error / symptom           | Likely cause                                 | Fix                                                              |
-| ------------------------- | -------------------------------------------- | ---------------------------------------------------------------- |
-| No gas / cannot find coin | SUI is in address balance, not a coin object | Fund address; follow current Sui docs to convert balance → coin  |
-| Wrong network publish     | Active env is not mainnet                    | `sui client switch --env mainnet` then republish                 |
-| Insufficient gas budget   | Budget too low                               | Raise `--gas-budget` (e.g. `100000000` publish, `10000000` call) |
+Restart if requested, open a new normal terminal, and run `sui --version`.
 
-#### `sui client balance` times out (`tcp connect error`)
+### The terminal is in the wrong folder
 
-First check the selected environment and its RPC URL:
+If npm cannot find `package.json`, open a terminal in `web`.
+If Sui cannot find `Move.toml`, open a terminal in `move`.
+Use VS Code's **Open in Integrated Terminal** on the correct folder.
+Do not keep entering `cd web` when you are already inside `web`.
 
-```bash
-sui client active-env
-sui client envs
-```
+### Git cannot save or upload
 
-Confirm that the active environment is `mainnet` and its URL is the intended Mainnet endpoint, `https://fullnode.mainnet.sui.io:443` in this guide. If needed, run `sui client switch --env mainnet`. A timeout can come from the RPC endpoint, ISP routing, a firewall or proxy, or the local network; it does not establish whether the address has SUI.
+For "Author identity unknown", run the two `git config` commands in Step 4 with your own details.
+For "Permission denied" or "Repository not found", run `git remote -v`.
+The URL must belong to your fork, and Git's sign-in must use the account that owns it.
+If Git reports that your branch is behind, review the changes on GitHub before reconciling them.
+Do not force-push.
 
-If the URL is correct, try [Cloudflare WARP](https://developers.cloudflare.com/warp-client/get-started/windows/) **in WARP mode** as a routing workaround, then retry `sui client balance`. A standard VPN is another option. Cloudflare's **1.1.1.1-only mode** routes DNS, not the full Sui RPC connection, so select WARP mode for this test. A returned balance, even `0`, confirms connectivity. A zero balance still needs Mainnet SUI before publishing or creating a card.
+### Sui cannot connect or has no gas
 
+Run `sui client active-env`, `sui client envs`, and `sui client active-address`.
+Confirm Mainnet uses `https://fullnode.mainnet.sui.io:443` and that you funded the active address.
 
+A timeout is a connection problem, not proof of a zero balance.
+Try another permitted internet connection.
+If your network allows it, [Cloudflare WARP](https://developers.cloudflare.com/warp-client/get-started/windows/) in WARP mode can help test routing issues.
+A returned balance of zero means the connection works but the address still needs funding.
 
+If Sui reports no usable gas coin despite a positive balance, check the [Sui address-balance guidance](https://www.docs.sui.io/onchain-finance/asset-custody/address-balances/using-address-balances) and your CLI version before retrying.
+Do not repeatedly publish or create cards to test funding.
 
-### Publish / create
+### The create command fails
 
+Confirm that `--package` contains your Package ID.
+Keep the fixed registry ID first, followed by all twelve quoted values.
+In PowerShell, remove spaces after continuation backticks.
+If the multiline paste still fails, join the lines into one line and remove the continuation backticks.
 
-| Error / symptom                             | Likely cause                                               | Fix                                                                  |
-| ------------------------------------------- | ---------------------------------------------------------- | -------------------------------------------------------------------- |
-| Compile error in Move                       | Dependency / syntax issue                                  | Run `sui move build` and fix reported lines first                    |
-| `Move.lock` is a directory (Linux/macOS)    | Corrupt lock path                                          | `cd move && rm Move.lock && sui move build`                          |
-| `create_builder_card` arity / type mismatch | Wrong number or order of args                              | Use registry object + 12 strings; do **not** pass `builder_no`       |
-| Registry object not found / wrong type      | Wrong network registry ID                                  | Use the Mainnet ID on mainnet (see Step 7)                           |
-| Object created but Suiscan shows no link    | Forgot `website_url` or used trailing slash inconsistently | Pass clean HTTPS URL with no trailing slash; recreate card if needed |
-| Old object missing `website_url`            | Object created with previous schema                        | Republish package and create a **new** card                          |
+If Sui reports an unsupported protocol or compiler version, compare your `sui --version` with the [current installation guidance](https://docs.sui.io/getting-started/onboarding/sui-install).
+Update through your package manager if needed, then repeat the build and test checks before any new transaction.
 
+### The website is empty or shows an error
 
+Check the BuilderCard Object ID and `VITE_SUI_NETWORK=mainnet`.
+For the local site, save `.env`, stop the server, and start it again.
+For Vercel, confirm the settings apply to Production and redeploy.
+If the card is still missing, open its Object ID on Suiscan and confirm the type is `::builder_card::BuilderCard`.
 
+For a missing photo, check the exact filename and that your change reached GitHub.
+Open your production URL followed by `/assets/profile.png` to test the image directly.
 
-### Frontend
+## Change or reset the displayed card
 
+To display a different card, use its Object ID in both the local and Vercel settings.
+Restart the local server and redeploy Vercel.
+Creating another card requires another successful Step 7 transaction.
 
-| Error / symptom                     | Likely cause                                    | Fix                                                                |
-| ----------------------------------- | ----------------------------------------------- | ------------------------------------------------------------------ |
-| Card stays empty / grey dot         | `VITE_PORTFOLIO_OBJECT_ID` empty or not rebuilt | Set object ID in `.env`, then restart `npm run dev` or rebuild     |
-| Card error / “object not found”     | Wrong ID, wrong network, or typo                | Match `VITE_SUI_NETWORK=mainnet` to where the object exists        |
-| Env change ignored                  | Vite caches build-time env                      | Stop/restart `npm run dev`; for production, rebuild + redeploy     |
-| Photo missing                       | File not at `web/public/assets/profile.png`     | Replace that exact path/filename and redeploy                      |
-| Photo OK locally, broken on Suiscan | Site not deployed or wrong `website_url`        | Deploy site first; pass that URL as last create arg                |
-| Dot green but fields empty/error    | Object ID set but fetch failed                  | Check network, object type ends with `::builder_card::BuilderCard` |
+To show an empty card, clear only `VITE_PORTFOLIO_OBJECT_ID=` and rebuild or restart.
+Keep the network setting.
+This changes what the website displays.
+It does not remove the old on-chain data.
 
-
-
-
-### Reset / handoff
-
-
-| Goal                                | What to do                                                         |
-| ----------------------------------- | ------------------------------------------------------------------ |
-| Clear personal data from local site | Empty `VITE_PORTFOLIO_OBJECT_ID` in `web/.env`, restart dev server |
-| Prepare repo for next cohort        | Keep `.env.example` empty for that value; never commit `.env`      |
-| Clear hosted site                   | Clear Vercel env vars → Redeploy                                   |
-| Delete on-chain data                | Not possible — create a new object and point the site at it        |
-
-
----
-
-
-
-## Optional Testnet practice
-
-Use this only if you want extra practice **before** Mainnet workshop production:
-
-1. `sui client switch --env testnet` and fund via [https://faucet.sui.io/](https://faucet.sui.io/)
-2. Practice publish + create on Testnet.
-3. Testnet registry ID: `0x2995095d1e6fda52afde3649a74be5fc2b1dc8b57bfc9f60d5ff708afdcdc923`
-4. Set `VITE_SUI_NETWORK=testnet` so the frontend GraphQL client matches.
-5. Suiscan Testnet: [https://suiscan.xyz/testnet](https://suiscan.xyz/testnet)
-6. When ready for workshop production, switch to Mainnet, republish, recreate, set `VITE_SUI_NETWORK=mainnet`, update env, and redeploy.
-
----
-
-
+Keep `web/.env.example` empty for the Object ID when sharing the starter.
+Keep `move/Move.lock`; do not delete it as a routine troubleshooting step.
 
 ## License
 
-Workshop educational use. Cryptita Plays branding and partner assets belong to their respective owners.
+Workshop educational use.
+Cryptita Plays branding and partner assets belong to their respective owners.
