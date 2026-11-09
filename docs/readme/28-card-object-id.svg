@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 310" role="img" aria-labelledby="title description">
+  <title id="title">Find the BuilderCard Object ID after creating the card</title>
+  <desc id="description">In successful Sui call output, find Created Objects with a type ending in builder_card BuilderCard. Copy that entry's ObjectID for the website settings. Do not use the package ID or registry ID.</desc>
+  <rect width="1100" height="310" rx="20" fill="#f6f9ff"/>
+  <text x="42" y="47" fill="#142d43" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">Where your personal card ID comes from</text>
+  <text x="42" y="74" fill="#426078" font-family="Segoe UI, Arial, sans-serif" font-size="14">Illustrative successful call output. Your ObjectID will be different.</text>
+  <rect x="42" y="101" width="600" height="156" rx="14" fill="#112b3e"/>
+  <text x="62" y="134" fill="#ffffff" font-family="Consolas, monospace" font-size="17" font-weight="700">Created Objects</text>
+  <text x="62" y="169" fill="#dbeeff" font-family="Consolas, monospace" font-size="15">Type: ...::builder_card::BuilderCard</text>
+  <rect x="57" y="184" width="568" height="45" rx="7" fill="#1769aa"/>
+  <text x="70" y="214" fill="#ffffff" font-family="Consolas, monospace" font-size="17" font-weight="700">ObjectID: 0xYOUR_OBJECT_ID</text>
+  <path d="M655 204h64m-14-11 14 11-14 11" fill="none" stroke="#1769aa" stroke-width="4" stroke-linejoin="round"/>
+  <rect x="732" y="101" width="326" height="156" rx="14" fill="#dbeaf7"/>
+  <text x="754" y="143" fill="#1769aa" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Save as BuilderCard</text>
+  <text x="754" y="168" fill="#1769aa" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Object ID</text>
+  <text x="754" y="215" fill="#426078" font-family="Segoe UI, Arial, sans-serif" font-size="14">Use in Step 8 website settings.</text>
+  <text x="42" y="289" fill="#426078" font-family="Segoe UI, Arial, sans-serif" font-size="14">Package ID and registry ID identify different objects. Do not paste either into VITE_PORTFOLIO_OBJECT_ID.</text>
+</svg>

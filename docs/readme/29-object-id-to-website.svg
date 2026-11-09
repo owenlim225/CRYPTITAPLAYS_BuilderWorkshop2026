@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 310" role="img" aria-labelledby="title description">
+  <title id="title">Connect the BuilderCard Object ID to both website settings</title>
+  <desc id="description">Copy the BuilderCard Object ID into the local web dot env file and the Vercel Production environment variable. Keep the network and chain settings, then redeploy for the live website to update.</desc>
+  <rect width="1100" height="310" rx="20" fill="#f6f9ff"/>
+  <text x="42" y="47" fill="#142d43" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">Use the same card ID in both places</text>
+  <rect x="42" y="92" width="310" height="144" rx="14" fill="#1769aa"/>
+  <text x="62" y="130" fill="#ffffff" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Step 7 output</text>
+  <text x="62" y="169" fill="#ffffff" font-family="Consolas, monospace" font-size="16">BuilderCard ObjectID</text>
+  <text x="62" y="198" fill="#ffffff" font-family="Consolas, monospace" font-size="16">0xYOUR_OBJECT_ID</text>
+  <path d="M367 164h46m-13-11 13 11-13 11M713 164h46m-13-11 13 11-13 11" fill="none" stroke="#1769aa" stroke-width="4" stroke-linejoin="round"/>
+  <rect x="426" y="92" width="275" height="144" rx="14" fill="#112b3e"/>
+  <text x="446" y="130" fill="#ffffff" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Local web/.env</text>
+  <text x="446" y="169" fill="#dbeeff" font-family="Consolas, monospace" font-size="14">VITE_PORTFOLIO_OBJECT_ID=</text>
+  <text x="446" y="195" fill="#dbeeff" font-family="Consolas, monospace" font-size="16">0xYOUR_OBJECT_ID</text>
+  <rect x="772" y="92" width="286" height="144" rx="14" fill="#112b3e"/>
+  <text x="792" y="130" fill="#ffffff" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700">Vercel Production</text>
+  <text x="792" y="169" fill="#dbeeff" font-family="Consolas, monospace" font-size="14">VITE_PORTFOLIO_OBJECT_ID</text>
+  <text x="792" y="195" fill="#dbeeff" font-family="Consolas, monospace" font-size="16">0xYOUR_OBJECT_ID</text>
+  <text x="42" y="275" fill="#426078" font-family="Segoe UI, Arial, sans-serif" font-size="15">After saving the Vercel setting, redeploy the production site and wait for Ready.</text>
+</svg>

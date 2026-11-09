@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 290" role="img" aria-labelledby="title description">
+  <title id="title">Check the active Sui address and its balance</title>
+  <desc id="description">Sui client active-address prints a public address. Sui client balance shows the SUI held by that active address on the selected network. The recovery phrase must remain private.</desc>
+  <rect width="1100" height="290" rx="20" fill="#f6f9ff"/>
+  <text x="42" y="46" fill="#142d43" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">Fund and check the address you selected</text>
+  <text x="42" y="73" fill="#426078" font-family="Segoe UI, Arial, sans-serif" font-size="14">Example values only. Check your own active address and network.</text>
+  <rect x="42" y="100" width="480" height="128" rx="14" fill="#112b3e"/>
+  <text x="62" y="134" fill="#dbeeff" font-family="Consolas, monospace" font-size="16">$ sui client active-address</text>
+  <text x="62" y="172" fill="#ffffff" font-family="Consolas, monospace" font-size="19" font-weight="700">0xYOUR_PUBLIC_ADDRESS</text>
+  <text x="62" y="205" fill="#a9c8df" font-family="Segoe UI, Arial, sans-serif" font-size="14">Share this address to receive SUI.</text>
+  <path d="M535 164h60m-14-11 14 11-14 11" fill="none" stroke="#1769aa" stroke-width="4" stroke-linejoin="round"/>
+  <rect x="608" y="100" width="450" height="128" rx="14" fill="#112b3e"/>
+  <text x="628" y="134" fill="#dbeeff" font-family="Consolas, monospace" font-size="16">$ sui client balance</text>
+  <text x="628" y="172" fill="#ffffff" font-family="Consolas, monospace" font-size="18" font-weight="700">Sui   100000000   0.10 SUI</text>
+  <text x="628" y="205" fill="#a9c8df" font-family="Segoe UI, Arial, sans-serif" font-size="14">Readable balance is in the last column.</text>
+  <text x="42" y="263" fill="#9c2f3b" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="700">Never share the recovery phrase printed during address creation.</text>
+</svg>

@@ -274,13 +274,21 @@ git branch --show-current
 **Check:** the branch is `main`.
 If it is not, reopen the fork you cloned in Step 1 before continuing.
 
-Set the name and email that Git attaches to commits in this project.
-Replace both examples.
+If Git keeps using a different GitHub account, remove the saved GitHub credential in Windows Credential Manager so Git can ask you to sign in again:
+
+```powershell
+cmdkey /delete:git:https://github.com
+```
+
+This signs Git out of GitHub on this computer; skip it if Git already uses the correct account.
+Set the name and email that Git attaches to commits.
+These global settings also apply to your other Git repositories on this computer.
+Replace both examples with your own details.
 Use your GitHub account email, or the private commit email shown in **GitHub Settings > Emails**.
 
 ```powershell
-git config user.name "Your Name"
-git config user.email "YOUR_GITHUB_EMAIL"
+git config --global user.name "YOUR_GITHUB_USERNAME"
+git config --global user.email "YOUR_GITHUB_EMAIL"
 git add web/public/assets/profile.png
 git commit -m "Customize profile photo"
 git push origin main
@@ -288,8 +296,10 @@ git push origin main
 
 A *commit* saves a named set of changes.
 *Push* uploads those commits.
-Complete the GitHub browser sign-in if Git requests it.
+When `git push` opens GitHub in your browser, sign in to the account that owns your fork and approve Git's request, then return to the terminal and wait for the push to finish.
 If Git says "nothing to commit", check whether the correct photo is already on your fork.
+
+![How the local photo change reaches your GitHub fork](docs/readme/26-github-push-flow.svg)
 
 Open your fork on GitHub and confirm that `web/public/assets/profile.png` is your photo.
 Vercel builds from GitHub, so files saved only on your computer will not appear online.
@@ -322,14 +332,18 @@ Sui account commands work from any folder.
 
 Your Sui *address* is the public identifier that receives SUI and owns your card.
 A *recovery phrase* or private key controls that address.
-Keep it private and backed up.
+Keep it private and backed up offline.
 Never put it in GitHub, Vercel, website settings, a QR code, or a screenshot you share.
+CLI output can reveal the recovery phrase, so check and redact it before copying output or sharing a screenshot.
 
 ```powershell
-sui client
+sui client addresses
 ```
 
 If asked to create a configuration, answer `y`.
+On some CLI versions, this command also generates a keypair and prints its `secret recovery phrase` before listing addresses.
+Record that phrase privately when it appears; anyone who has it can control the address.
+In the address table, `address` is the public `0x...` address, and `*` under `active address` marks the one currently selected.
 Some CLI versions also ask for a server URL, environment alias, and key scheme.
 If those prompts appear, use these answers:
 
@@ -338,7 +352,7 @@ If those prompts appear, use these answers:
 - Key scheme: `0` for ed25519.
 
 If the CLI creates a default Testnet configuration automatically, continue below.
-If you already have a configuration, `sui client` may show help instead.
+If you already have a configuration, `sui client addresses` lists the existing addresses.
 
 List your configured networks:
 
@@ -361,7 +375,10 @@ sui client active-address
 ```
 
 If there is no active address, create one and select it.
-Replace `0xYOUR_ADDRESS` with the address from the creation output:
+You can also use `new-address` to create a separate address when one is already active.
+Its output shows an `address` field containing the public `0x...` address and a `recoveryPhrase` field containing the secret phrase; the address is not a private key.
+Creating an address may leave the previous address active.
+Replace `0xYOUR_ADDRESS` with the public `address` field from the creation output, then confirm `active-address` prints that same value:
 
 ```powershell
 sui client new-address ed25519
@@ -380,6 +397,8 @@ You can still complete the local frontend exercises without funding.
 ```powershell
 sui client balance
 ```
+
+![How to check the active Sui address and its balance](docs/readme/27-sui-address-balance.svg)
 
 **Check:** the command returns a positive SUI balance.
 If it returns zero, wait for funding.
@@ -413,10 +432,10 @@ sui client balance
 Continue only when the network is `mainnet` and the address is the one you funded.
 
 ```powershell
-sui client publish --gas-budget 100000000
+sui client publish
 ```
 
-The gas budget is a maximum, not a quoted fee.
+This CLI estimates the gas budget with a dry run when you omit `--gas-budget`; you still need enough SUI to pay the actual fee.
 Wait for the transaction result.
 If the connection drops or the result is uncertain, check your address's transactions on [Suiscan](https://suiscan.xyz/mainnet) before retrying.
 Repeating a successful publish spends more SUI.
@@ -494,6 +513,8 @@ In the successful output, find the **Created Objects** entry whose type ends wit
 Copy that entry's **ObjectID** into your notes as **BuilderCard Object ID**.
 The registry assigns your builder number automatically.
 
+![Where to find the created BuilderCard Object ID](docs/readme/28-card-object-id.svg)
+
 Open `https://suiscan.xyz/mainnet/object/0xYOUR_OBJECT_ID/fields` in your browser after replacing the example ID.
 
 **Check:** Suiscan shows your name and the website URL you entered.
@@ -523,6 +544,8 @@ Changes to `.env` do not update Vercel automatically.
 5. Apply all three settings to **Production** and save.
 6. Open **Deployments**, select the latest production deployment's menu, and choose **Redeploy**.
 7. Wait for the new deployment to show **Ready**.
+
+![How the BuilderCard Object ID reaches the local and live website](docs/readme/29-object-id-to-website.svg)
 
 ![Vercel environment variable settings](docs/readme/14-vercel-env-tab.png)
 

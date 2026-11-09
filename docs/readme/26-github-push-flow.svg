@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 260" role="img" aria-labelledby="title description">
+  <title id="title">Push the photo change to your GitHub fork</title>
+  <desc id="description">The local commit is pushed to origin main, GitHub browser sign-in may appear, and the photo is then checked on the fork.</desc>
+  <rect width="1100" height="260" rx="20" fill="#f6f9ff"/>
+  <text x="42" y="48" fill="#142d43" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">From your computer to your fork</text>
+  <g font-family="Segoe UI, Arial, sans-serif" text-anchor="middle">
+    <rect x="42" y="88" width="290" height="105" rx="14" fill="#112b3e"/>
+    <text x="187" y="128" fill="#ffffff" font-size="18" font-weight="700">Local commit</text>
+    <text x="187" y="158" fill="#dbeeff" font-size="15">profile.png saved in Git</text>
+    <rect x="405" y="88" width="290" height="105" rx="14" fill="#1769aa"/>
+    <text x="550" y="128" fill="#ffffff" font-size="18" font-weight="700">git push origin main</text>
+    <text x="550" y="158" fill="#ffffff" font-size="15">Sign in via browser if asked</text>
+    <rect x="768" y="88" width="290" height="105" rx="14" fill="#112b3e"/>
+    <text x="913" y="128" fill="#ffffff" font-size="18" font-weight="700">Your GitHub fork</text>
+    <text x="913" y="158" fill="#dbeeff" font-size="15">Confirm the photo is there</text>
+  </g>
+  <path d="M340 140h48m-12-11 12 11-12 11M703 140h48m-12-11 12 11-12 11" fill="none" stroke="#1769aa" stroke-width="4" stroke-linejoin="round"/>
+  <text x="42" y="229" fill="#426078" font-family="Segoe UI, Arial, sans-serif" font-size="14">Vercel uses the files on your GitHub fork, so check the fork before deploying.</text>
+</svg>
