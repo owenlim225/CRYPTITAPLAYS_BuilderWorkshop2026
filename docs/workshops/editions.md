@@ -23,7 +23,7 @@ git worktree add --detach ../community-1-bfcbinan COMMUNITY-1-BFCBINAN
 
 Choose an unused destination directory. This creates a separate checkout without switching your current working tree. To intentionally develop changes from the original edition instead, create a new branch from that tag. Do not move or overwrite an edition tag to contain later work; create a new release reference when needed.
 
-Preservation covers **committed source and Git history only**. Tags do not preserve ignored `.env` files, installed dependencies, hosting settings, a live website, Sui account keys, or off-repository assets. Follow the preserved edition's setup guide and provide the appropriate local configuration when rebuilding. Nothing about this source checkpoint deletes or modifies on-chain objects.
+Preservation covers **committed source and Git history only**. Tags do not preserve other ignored environment files, installed dependencies, hosting settings, a live website, Sui account keys, or off-repository assets. Follow the preserved edition's setup guide and provide the appropriate local configuration when rebuilding. Nothing about this source checkpoint deletes or modifies on-chain objects.
 
 ## MMCL delivery
 

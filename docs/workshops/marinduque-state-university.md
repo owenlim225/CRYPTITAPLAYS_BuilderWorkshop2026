@@ -32,19 +32,9 @@ cd web
 npm ci
 ```
 
-For a fresh clone, create your local environment file using your shell:
+The repository includes `web/.env`. Clear `VITE_PORTFOLIO_OBJECT_ID` to begin with placeholders, and keep the network setting.
 
-```powershell
-# PowerShell
-Copy-Item .env.example .env
-```
-
-```bash
-# Git Bash / macOS / Linux
-cp .env.example .env
-```
-
-Keep an existing `.env` if you already configured one. Leave `VITE_PORTFOLIO_OBJECT_ID=` empty to begin with placeholders, and keep the template's network setting. Never commit your local `.env`. Run:
+Run:
 
 ```bash
 npm run dev

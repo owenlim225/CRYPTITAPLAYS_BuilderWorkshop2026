@@ -223,23 +223,9 @@ npm install
 `npm install` installs the website dependencies.
 Wait for installation to finish successfully.
 
-Create your local settings file:
-
-```powershell
-Copy-Item .env.example .env
-```
-
-Run this copy command only the first time.
-If `web/.env` already exists, keep it.
-In VS Code, open `web/.env` and confirm:
-
-```env
-VITE_PORTFOLIO_OBJECT_ID=
-VITE_SUI_NETWORK=mainnet
-VITE_CHAIN=sui
-```
-
-Leave the Object ID empty for now.
+The `web/.env` settings file is included in the repository.
+In VS Code, open `web/.env` and confirm the network and chain settings.
+Clear `VITE_PORTFOLIO_OBJECT_ID` to start with a placeholder card.
 Save with **Ctrl+S**.
 
 Replace `web/public/assets/profile.png` with your photo.
@@ -525,11 +511,10 @@ VITE_CHAIN=sui
 
 Save the file.
 Do not use the Package ID or the registry ID here.
-The `.env` file contains website settings and stays on your computer.
-Do not commit it.
+The `.env` file contains public website settings and is included in the repository.
 All `VITE_*` settings are public in the built website, so never put secrets in them.
 
-Your local `.env` does not update Vercel automatically.
+Changes to `.env` do not update Vercel automatically.
 
 1. Open your project in Vercel.
 2. Select **Settings > Environment Variables**.
@@ -703,7 +688,7 @@ Keep the network setting.
 This changes what the website displays.
 It does not remove the old on-chain data.
 
-Keep `web/.env.example` empty for the Object ID when sharing the starter.
+Clear the Object ID in `web/.env` before sharing a starter without a card.
 Keep `move/Move.lock`; do not delete it as a routine troubleshooting step.
 
 ## License

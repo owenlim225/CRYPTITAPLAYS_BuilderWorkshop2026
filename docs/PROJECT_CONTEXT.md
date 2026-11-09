@@ -49,9 +49,9 @@ The repository guidance explicitly says that current code and the root README su
 
 Known documentation drift:
 
-- `web/README.md` is a short frontend README and still shows `VITE_SUI_NETWORK=testnet` in its example. The production workshop path in the root README and the tracked `web/.env.example` use `mainnet`.
+- `web/README.md` is a short frontend README and shows `VITE_SUI_NETWORK=mainnet` in its example. The production workshop path in the root README and the tracked `web/.env` use `mainnet`.
 - Some historical specs describe manual builder numbers, a different argument count, no Display initialization, or different photo handling. Those are obsolete for the current code.
-- Before changing behavior, inspect `move/sources/builder_card.move`, `web/src/`, `web/.env.example`, and the root README together.
+- Before changing behavior, inspect `move/sources/builder_card.move`, `web/src/`, `web/.env`, and the root README together.
 
 ## 4. Repository map
 
@@ -72,7 +72,7 @@ Known documentation drift:
 └── web/
     ├── package.json                  Frontend scripts and dependencies
     ├── package-lock.json             Locked frontend dependencies
-    ├── .env.example                  Public build-time configuration template
+    ├── .env                          Public build-time configuration
     ├── index.html                    Vite HTML entry
     ├── public/assets/                Static logos, icons, and profile.png
     └── src/
@@ -86,7 +86,7 @@ Known documentation drift:
         └── types.ts                  Frontend data contracts
 ```
 
-Generated or local-only material that should not be committed includes `web/.env`, `web/dist/`, `move/build/`, `move/.move/`, and dependency folders.
+Generated or local-only material that should not be committed includes `web/dist/`, `move/build/`, `move/.move/`, and dependency folders.
 
 ## 5. On-chain package
 
@@ -255,7 +255,7 @@ Behavior:
 
 - `VITE_PORTFOLIO_OBJECT_ID` is trimmed. Empty means no object is configured.
 - `VITE_SUI_NETWORK` is normalized to `mainnet`, `testnet`, or `devnet`. Unknown values become `testnet`.
-- If `VITE_SUI_NETWORK` is omitted entirely, the source fallback is `testnet`; the tracked `.env.example` explicitly sets `mainnet` for the workshop production path.
+- If `VITE_SUI_NETWORK` is omitted entirely, the source fallback is `testnet`; the tracked `.env` explicitly sets `mainnet` for the workshop production path.
 - `VITE_CHAIN` selects the visual chain theme. The current supported chain is `sui`; unknown values fall back to Sui styling.
 - GraphQL endpoints are selected in code:
   - Mainnet: `https://graphql.mainnet.sui.io/graphql`
@@ -380,7 +380,7 @@ cd web
 npm ci
 ```
 
-Copy `web/.env.example` to `web/.env` using the platform’s normal file-copy command. Keep `VITE_PORTFOLIO_OBJECT_ID` empty until a card has been created. Never commit `.env` values, keystores, private keys, tokens, or credentials.
+The repository includes `web/.env`. Clear `VITE_PORTFOLIO_OBJECT_ID` for a placeholder card, or set it to a public BuilderCard object ID. Never put keystores, private keys, tokens, or credentials in `.env`.
 
 Check the Sui CLI and active environment:
 
@@ -518,7 +518,7 @@ When making a documentation-only change, avoid rewriting unrelated user edits. C
 - Frontend guide: [`web/README.md`](web/README.md)
 - Contract source: [`move/sources/builder_card.move`](move/sources/builder_card.move)
 - Move package manifest: [`move/Move.toml`](move/Move.toml)
-- Frontend environment template: [`web/.env.example`](web/.env.example)
+- Frontend environment file: [`web/.env`](../web/.env)
 - Frontend types: [`web/src/types.ts`](web/src/types.ts)
 - Sui configuration: [`web/src/config.ts`](web/src/config.ts)
 - Sui GraphQL client: [`web/src/lib/suiClient.ts`](web/src/lib/suiClient.ts)

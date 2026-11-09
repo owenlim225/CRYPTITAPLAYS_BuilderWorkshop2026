@@ -17,15 +17,15 @@ npm run preview  # serve dist/
 
 ## Configure
 
-Copy `.env.example` to `.env`:
+The repository includes `.env` with these settings:
 
 ```env
-VITE_PORTFOLIO_OBJECT_ID=
+VITE_PORTFOLIO_OBJECT_ID=<your BuilderCard object ID>
 VITE_SUI_NETWORK=mainnet
 VITE_CHAIN=sui
 ```
 
-- Empty `VITE_PORTFOLIO_OBJECT_ID` is valid (placeholder card + grey status dot).
+- Clear `VITE_PORTFOLIO_OBJECT_ID` to show the placeholder card and grey status dot.
 - After `create_builder_card`, paste the **created object ID** and rebuild. Vite inlines `VITE_*` at build time.
 - Replace `public/assets/profile.png` with your portrait (keep the filename).
 
