@@ -178,11 +178,12 @@ A *fork* is your own copy of a project on GitHub.
 *Clone* means download that copy to your computer.
 
 1. Open the [workshop repository](https://github.com/owenlim225/CRYPTITAPLAYS_BuilderWorkshop2026).
-2. Click **Fork**.
-3. Set **Owner** to your account.
-4. Name the repository `CRYPTITAPLAYS_BuilderWorkshop2026_LastName`, replacing `LastName` with your surname.
-5. Select **Copy the main branch only**, then **Create fork**.
-6. On your fork's page, select **Code > HTTPS** and copy the URL.
+2. Click **Star** in the upper-right corner of the repository page.
+3. Click **Fork**.
+4. Set **Owner** to your account.
+5. Name the repository `CRYPTITAPLAYS_BuilderWorkshop2026_LastName`, replacing `LastName` with your surname.
+6. Select **Copy the main branch only**, then **Create fork**.
+7. On your fork's page, select **Code > HTTPS** and copy the URL.
 
 ![GitHub fork settings](docs/readme/04-github-fork.png)
 
