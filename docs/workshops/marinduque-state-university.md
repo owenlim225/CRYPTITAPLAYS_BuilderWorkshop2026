@@ -111,7 +111,7 @@ Your redesign must preserve:
 - Empty, loading, error, and successful data states. An error must remain visible and must not be replaced with invented profile data.
 - Front/back flip, keyboard-operable controls, copy feedback, and the distinction between a card click and a link/button click. Back-face links must retain their hidden-face focus handling.
 - A card that fits the existing single-viewport experience on narrow and desktop screens, with readable text and visible focus indicators.
-- The Marinduque State University partner lineup: CJC Race, Blockchain4Youth, Grantix, Kamiyon Studio, Blockchain4Her, BingX Academy, Conexus, GNClub, Iskolar, NEN Digital, Safehouse. Preserve asset proportions and the existing verified destinations.
+- The Marinduque State University partner lineup: CJC Race, Blockchain4Youth, Grantix, Kamiyon Studio, and Blockchain4Her. Preserve asset proportions and the existing verified destinations.
 - Shared live/export content, both faces visible in the exported composition, and Camera disabled until the profile successfully loads.
 
 <details>

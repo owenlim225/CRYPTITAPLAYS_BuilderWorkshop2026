@@ -327,31 +327,11 @@ export function CardBackFace({
               >
                 <img src="/assets/partners/kamiyon-studio.svg" alt="Kamiyon Studio" />
               </a>
-              <div className="community-partner community-partner--wide">
-                <img src="/assets/partners/bingx-academy.png" alt="BingX Academy" />
-              </div>
               <div className="community-partner community-partner--wide community-partner--youth">
                 <img src="/assets/partners/blockchain4youth.png" alt="Blockchain4Youth" />
               </div>
-            </div>
-            <div className="community-logos-row community-logos-row--second">
               <div className="community-partner community-partner--compact">
                 <img src="/assets/partners/cjc-race.png" alt="CJC Race" />
-              </div>
-              <div className="community-partner community-partner--compact">
-                <img src="/assets/partners/gnclub.png" alt="GNClub" />
-              </div>
-              <div className="community-partner community-partner--compact community-partner--padded">
-                <img src="/assets/partners/iskolar.png" alt="Iskolar" />
-              </div>
-              <div className="community-partner community-partner--compact">
-                <img src="/assets/partners/safehouse.png" alt="Safehouse" />
-              </div>
-              <div className="community-partner community-partner--compact community-partner--padded">
-                <img src="/assets/partners/nen-digital.png" alt="NEN Digital" />
-              </div>
-              <div className="community-partner community-partner--compact community-partner--conexus">
-                <img src="/assets/partners/conexus.png" alt="Conexus" />
               </div>
             </div>
           </div>

@@ -24,31 +24,11 @@ See [university editions](docs/workshops/editions.md) for preserved earlier work
       </a>
     </td>
     <td align="center" valign="middle">
-      <img src="web/public/assets/partners/bingx-academy.png" alt="BingX Academy" height="38">
-    </td>
-    <td align="center" valign="middle">
       <img src="web/public/assets/partners/blockchain4youth.png" alt="Blockchain4Youth" height="44">
-    </td>
-  </tr>
-  <tr>
-    <td align="center" valign="middle">
-      <img src="web/public/assets/partners/cjc-race.png" alt="CJC Race" height="56">
-    </td>
-    <td align="center" valign="middle">
-      <img src="web/public/assets/partners/gnclub.png" alt="GNClub" height="42">
-    </td>
-    <td align="center" valign="middle">
-      <img src="web/public/assets/partners/iskolar.png" alt="Iskolar" height="48">
-    </td>
-    <td align="center" valign="middle">
-      <img src="web/public/assets/partners/safehouse.png" alt="Safehouse" height="42">
-    </td>
-    <td align="center" valign="middle">
-      <img src="web/public/assets/partners/nen-digital.png" alt="NEN Digital" height="42">
-    </td>
-    <td align="center" valign="middle">
-      <img src="web/public/assets/partners/conexus.png" alt="Conexus" height="42">
-    </td>
+      </td>
+      <td align="center" valign="middle">
+        <img src="web/public/assets/partners/cjc-race.png" alt="CJC Race" height="56">
+      </td>
   </tr>
 </table>
 
