@@ -32,7 +32,7 @@
 .community-logos--msu .community-partner--youth img {
   /* The wordmark occupies a narrow strip within its source PNG. */
   object-fit: cover;
-  transform: scale(1.15);
+  transform: scale(1.5);
 }
 
 .community-logos--msu .community-partner--compact {
