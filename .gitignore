@@ -54,5 +54,6 @@ ehthumbs.db
 # Specs (local planning docs)
 spec/
 
-# Local agent audit files
+# Local agent files
+.agents/
 .audit/

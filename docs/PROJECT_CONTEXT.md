@@ -60,8 +60,6 @@ Known documentation drift:
 ├── AGENTS.md                         Repository-specific agent rules
 ├── README.md                         Full workshop guide; current operational source of truth
 ├── PROJECT_CONTEXT.md                This consolidated LLM/contributor context
-├── package.json                      Minimal root package metadata
-├── package-lock.json                 Root lockfile
 ├── .gitignore                        Shared ignores, including env/build/spec paths
 ├── docs/
 │   ├── agents/                       Development, frontend, operations, verification, Git guidance
@@ -379,7 +377,7 @@ From the repository root:
 
 ```text
 cd web
-npm install
+npm ci
 ```
 
 Copy `web/.env.example` to `web/.env` using the platform’s normal file-copy command. Keep `VITE_PORTFOLIO_OBJECT_ID` empty until a card has been created. Never commit `.env` values, keystores, private keys, tokens, or credentials.
