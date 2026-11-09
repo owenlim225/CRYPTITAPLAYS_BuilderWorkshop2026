@@ -42,6 +42,24 @@ See [university editions](docs/workshops/editions.md) for earlier workshops.
   </tr>
 </table>
 
+## Contents
+
+- [Prerequisites](#prerequisites)
+- [Step-by-step workshop path](#step-by-step-workshop-path)
+  - [Step 1: Copy the project to your computer](#step-1)
+  - [Step 2: Prepare the website and your photo](#step-2)
+  - [Step 3: Run the website on your computer](#step-3)
+  - [Step 4: Put the website online](#step-4)
+  - [Step 5: Set up your Sui address](#step-5)
+  - [Step 6: Build and publish your card program](#step-6)
+  - [Step 7: Create your personal card](#step-7)
+  - [Step 8: Connect the website to your card](#step-8)
+  - [Step 9: Check your finished website](#step-9)
+- [Essential resources](#essential-resources)
+- [Troubleshooting](#troubleshooting)
+- [Change or reset the displayed card](#change-or-reset-the-displayed-card)
+- [License](#license)
+
 ## Prerequisites
 
 You need a Windows 10 or 11 computer, internet access, and permission to install software.
@@ -142,24 +160,6 @@ If that option is unavailable, right-click the project folder and select **Copy 
 Enter `Set-Location "PASTE_THE_COPIED_PATH_HERE"`, replacing the example with the copied path.
 Each terminal has its own current folder.
 Opening a file does not change the terminal's folder.
-
-## Contents
-
-- [Prerequisites](#prerequisites)
-- [Step-by-step workshop path](#step-by-step-workshop-path)
-  - [Step 1: Copy the project to your computer](#step-1)
-  - [Step 2: Prepare the website and your photo](#step-2)
-  - [Step 3: Run the website on your computer](#step-3)
-  - [Step 4: Put the website online](#step-4)
-  - [Step 5: Set up your Sui address](#step-5)
-  - [Step 6: Build and publish your card program](#step-6)
-  - [Step 7: Create your personal card](#step-7)
-  - [Step 8: Connect the website to your card](#step-8)
-  - [Step 9: Check your finished website](#step-9)
-- [Essential resources](#essential-resources)
-- [Troubleshooting](#troubleshooting)
-- [Change or reset the displayed card](#change-or-reset-the-displayed-card)
-- [License](#license)
 
 ## Step-by-step workshop path
 
