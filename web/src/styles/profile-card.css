@@ -1,10 +1,3 @@
-/* =========================================================
-   PROFILE CARD: white + maroon (Marinduque State University)
-   Front: white card with a maroon header band.
-   Back: solid maroon with a raised white-sweep logo.
-   Markup and class names are unchanged.
-   ========================================================= */
-
 :root {
   /* Kept: other components still read these */
   --chain-primary: #4da2ff;
@@ -14,17 +7,6 @@
   --text: #f4f4f4;
   --muted: rgba(255, 255, 255, 0.62);
   --border: rgba(255, 255, 255, 0.08);
-
-  /* Card palette */
-  --school-maroon: #800016;
-  --school-maroon-rgb: 128, 0, 22;
-  --school-maroon-deep: #630010;
-  --school-maroon-dark: #4a000c;
-  --school-ink: #221619;
-  --school-ink-soft: rgba(34, 22, 25, 0.66);
-  --school-paper: #ffffff;
-  --school-paper-tint: #fff9ea;
-  --blue: var(--school-maroon); /* legacy accent name */
 }
 
 /* =========================================================
@@ -51,8 +33,8 @@
   will-change: transform;
 
   box-shadow:
-    0 28px 60px rgba(99, 0, 16, 0.28),
-    0 8px 18px rgba(99, 0, 16, 0.18),
+    0 28px 60px rgba(var(--school-primary-rgb), 0.28),
+    0 8px 18px rgba(var(--school-primary-rgb), 0.18),
     0 0 0 1px rgba(255, 255, 255, 0.7);
 }
 
@@ -82,7 +64,7 @@
   color: #fff;
   background:
     radial-gradient(90% 120% at 80% 20%, rgba(255, 255, 255, 0.14), transparent 55%),
-    linear-gradient(135deg, #9b1228 0%, var(--school-maroon) 40%, var(--school-maroon-deep) 100%);
+    linear-gradient(135deg, #2d5db1 0%, var(--school-primary) 40%, var(--school-deep) 100%);
 }
 
 .profile-card.is-flipped {
@@ -95,7 +77,6 @@
   cursor: default;
 }
 
-/* Maroon/gold base stripe on the front */
 .card-front::after {
   content: "";
   position: absolute;
@@ -104,7 +85,7 @@
   bottom: 0;
   height: 9px;
   z-index: 6;
-  background: linear-gradient(90deg, var(--school-maroon-dark), #d9a300 55%, var(--school-maroon-deep));
+  background: linear-gradient(90deg, var(--school-dark), #d9a300 55%, var(--school-deep));
 }
 
 /* =========================================================
@@ -134,7 +115,7 @@
   pointer-events: none;
   background: radial-gradient(
     circle at var(--mx) var(--my),
-    rgba(var(--school-maroon-rgb), 0.08),
+    rgba(var(--school-primary-rgb), 0.08),
     transparent 22%
   );
 }
@@ -147,10 +128,6 @@
   );
   mix-blend-mode: screen;
 }
-
-/* =========================================================
-   FRONT WATERMARK (debossed logo, tinted red)
-   ========================================================= */
 
 .cryptita-deboss {
   --deboss-size: 78%;
@@ -184,7 +161,7 @@
 
 .deboss-shadow {
   transform: translate(2.2px, 2.2px);
-  background: rgba(var(--school-maroon-rgb), 0.3);
+  background: rgba(var(--school-primary-rgb), 0.3);
   filter: blur(0.7px);
 }
 
@@ -195,7 +172,7 @@
 }
 
 .deboss-face {
-  background: linear-gradient(145deg, rgba(var(--school-maroon-rgb), 0.13), rgba(var(--school-maroon-rgb), 0.05));
+  background: linear-gradient(145deg, rgba(var(--school-primary-rgb), 0.13), rgba(var(--school-primary-rgb), 0.05));
 }
 
 /* =========================================================
@@ -210,14 +187,15 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 16px;
 
   padding: 0 50px;
 
   color: #fff;
   background:
     linear-gradient(100deg, rgba(255, 255, 255, 0.1), transparent 40%),
-    linear-gradient(110deg, var(--school-maroon-deep) 0%, var(--school-maroon) 70%);
-  box-shadow: 0 6px 16px rgba(110, 0, 20, 0.22);
+    linear-gradient(110deg, var(--school-deep) 0%, var(--school-primary) 70%);
+  box-shadow: 0 6px 16px rgba(var(--school-primary-rgb), 0.22);
 }
 
 /* thin white rule under the band */
@@ -228,16 +206,20 @@
   right: 0;
   bottom: -4px;
   height: 3px;
-  background: linear-gradient(90deg, var(--school-maroon), #fff 50%, var(--school-maroon));
+  background: linear-gradient(90deg, var(--school-primary), #fff 50%, var(--school-primary));
   opacity: 0.9;
+}
+
+.brand {
+  min-width: 0;
 }
 
 .brand h2 {
   margin: 0;
   color: #fff;
-  font-size: clamp(22px, 2.5vw, 34px);
+  font-size: 30px;
   font-weight: 800;
-  line-height: 1;
+  line-height: 1.05;
   letter-spacing: -0.02em;
 }
 
@@ -256,7 +238,7 @@
 .field-label {
   display: block;
   margin-bottom: 6px;
-  color: var(--school-maroon);
+  color: var(--school-primary);
   font-size: 11px;
   font-weight: 700;
   line-height: 1;
@@ -272,13 +254,10 @@
   line-height: 1.3;
 }
 
-/* =========================================================
-   BUILDER NUMBER (inside red band)
-   ========================================================= */
-
 .builder-number {
   position: relative;
   display: flex;
+  flex-shrink: 0;
   flex-direction: column;
   align-items: flex-end;
   min-width: 120px;
@@ -365,11 +344,11 @@
   aspect-ratio: 0.79 / 1;
   padding: 3px;
   border-radius: 18px;
-  background: linear-gradient(145deg, var(--school-maroon), var(--school-maroon-deep));
+  background: linear-gradient(145deg, var(--school-primary), var(--school-deep));
   box-shadow:
-    0 18px 38px rgba(110, 0, 20, 0.28),
+    0 18px 38px rgba(var(--school-primary-rgb), 0.28),
     0 0 0 4px #fff,
-    0 0 0 5px rgba(var(--school-maroon-rgb), 0.25);
+    0 0 0 5px rgba(var(--school-primary-rgb), 0.25);
 }
 
 .profile-photo {
@@ -381,7 +360,7 @@
 }
 
 .profile-photo--placeholder {
-  background: linear-gradient(145deg, #f6e6e8, #e7c9ce);
+  background: linear-gradient(145deg, #eef4ff, #d6e3f8);
 }
 
 .profile-details {
@@ -391,7 +370,7 @@
 .identity-header {
   margin-bottom: 20px;
   padding-bottom: 16px;
-  border-bottom: 1px solid rgba(var(--school-maroon-rgb), 0.18);
+  border-bottom: 1px solid rgba(var(--school-primary-rgb), 0.18);
 }
 
 .identity-header .field-label {
@@ -437,10 +416,10 @@
 
 .skills span {
   padding: 6px 13px;
-  border: 1px solid rgba(var(--school-maroon-rgb), 0.28);
+  border: 1px solid rgba(var(--school-primary-rgb), 0.28);
   border-radius: 999px;
-  background: rgba(var(--school-maroon-rgb), 0.07);
-  color: var(--school-maroon-deep);
+  background: rgba(var(--school-primary-rgb), 0.07);
+  color: var(--school-deep);
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.02em;
@@ -449,10 +428,6 @@
 .skills .skills__placeholder {
   opacity: 0.5;
 }
-
-/* =========================================================
-   FLIP BUTTON (white outline so it reads on white AND red)
-   ========================================================= */
 
 .flip-btn {
   position: absolute;
@@ -473,15 +448,15 @@
   border-right: none;
   border-radius: 15px 0 0 15px;
 
-  background: linear-gradient(135deg, #9b1228, var(--school-maroon-deep));
+  background: linear-gradient(135deg, #2d5db1, var(--school-deep));
   color: #fff;
 
-  font-family: Georgia, serif;
+  font-family: inherit;
   font-size: 16px;
   cursor: pointer;
 
   box-shadow:
-    0 10px 25px rgba(60, 0, 12, 0.35),
+    0 10px 25px rgba(var(--school-primary-rgb), 0.35),
     inset 0 1px 0 rgba(255, 255, 255, 0.28);
 
   transition:
@@ -523,13 +498,13 @@
   grid-template-columns: 0.8fr 1px 1fr 1px 1.35fr 1px 1.35fr 1px 88px;
   align-items: center;
 
-  border: 1px solid rgba(var(--school-maroon-rgb), 0.2);
-  border-left: 4px solid var(--school-maroon);
+  border: 1px solid rgba(var(--school-primary-rgb), 0.2);
+  border-left: 4px solid var(--school-primary);
   border-radius: 14px;
   background: linear-gradient(145deg, #ffffff, var(--school-paper-tint));
   box-shadow:
     inset 0 1px 0 #fff,
-    0 10px 24px rgba(110, 0, 20, 0.1);
+    0 10px 24px rgba(var(--school-primary-rgb), 0.1);
 }
 
 .credential-field {
@@ -548,7 +523,7 @@
 .divider {
   width: 1px;
   height: 55%;
-  background: linear-gradient(to bottom, transparent, rgba(var(--school-maroon-rgb), 0.3), transparent);
+  background: linear-gradient(to bottom, transparent, rgba(var(--school-primary-rgb), 0.3), transparent);
 }
 
 .value-row {
@@ -576,7 +551,7 @@
 }
 
 .value-row__link:hover {
-  color: var(--school-maroon);
+  color: var(--school-primary);
   text-decoration: underline;
 }
 
@@ -595,7 +570,7 @@
 }
 
 .icon-btn:hover:not(:disabled) {
-  color: var(--school-maroon);
+  color: var(--school-primary);
   transform: translateY(-1px);
 }
 
@@ -613,10 +588,10 @@
   display: grid;
   place-items: center;
   text-decoration: none;
-  border: 1px solid rgba(var(--school-maroon-rgb), 0.2);
+  border: 1px solid rgba(var(--school-primary-rgb), 0.2);
   border-radius: 13px;
   background: #fff;
-  box-shadow: 0 4px 10px rgba(110, 0, 20, 0.08);
+  box-shadow: 0 4px 10px rgba(var(--school-primary-rgb), 0.08);
   transition:
     transform 160ms ease,
     border-color 160ms ease,
@@ -625,8 +600,8 @@
 
 .sui-link-box:hover {
   transform: translateY(-2px);
-  border-color: rgba(var(--school-maroon-rgb), 0.5);
-  box-shadow: 0 8px 16px rgba(110, 0, 20, 0.16);
+  border-color: rgba(var(--school-primary-rgb), 0.5);
+  box-shadow: 0 8px 16px rgba(var(--school-primary-rgb), 0.16);
 }
 
 .sui-logo {
@@ -648,7 +623,7 @@
 }
 
 .card-status--error {
-  color: var(--school-maroon-dark);
+  color: var(--school-dark);
   font-weight: 600;
 }
 
@@ -684,7 +659,7 @@
 
 .back-logo-shadow {
   transform: translate(5px, 5px);
-  background: rgba(60, 0, 12, 0.6);
+  background: rgba(var(--school-primary-rgb), 0.6);
   filter: blur(2px);
 }
 
@@ -697,15 +672,15 @@
 .back-logo-face {
   background: linear-gradient(
     115deg,
-    #b27b00 0%,
-    #d9a300 25%,
-    #f2cf68 42%,
-    #fff5d4 49%,
+    #d9e4f8 0%,
+    #f3f7ff 25%,
+    #ffffff 42%,
+    #ffffff 49%,
     #ffffff 50%,
-    #fff5d4 51%,
-    #f2cf68 58%,
-    #d9a300 75%,
-    #b27b00 100%
+    #ffffff 51%,
+    #ffffff 58%,
+    #f3f7ff 75%,
+    #d9e4f8 100%
   );
   background-size: 300% 100%;
   background-position: 100% 50%;
@@ -745,7 +720,7 @@
   }
   52% {
     filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.85))
-      drop-shadow(0 0 18px rgba(255, 190, 200, 0.5))
+      drop-shadow(0 0 18px rgba(255, 255, 255, 0.5))
       drop-shadow(0 0 32px rgba(255, 255, 255, 0.2));
   }
   68% {
@@ -774,7 +749,7 @@
   font-weight: 850;
   line-height: 1;
   letter-spacing: -0.035em;
-  text-shadow: 0 2px 10px rgba(60, 0, 12, 0.35);
+  text-shadow: 0 2px 10px rgba(var(--school-primary-rgb), 0.35);
 }
 
 .back-brand p {
@@ -863,8 +838,6 @@
   max-width: 105px;
   object-fit: contain;
 
-  /* Renders every partner logo as a clean white mark on the maroon card.
-     Remove this line if you prefer the logos in their original colors. */
   filter: brightness(0) invert(1);
 }
 
@@ -887,7 +860,7 @@
 .icon-btn:focus-visible,
 .sui-link-box:focus-visible,
 .value-row__link:focus-visible {
-  outline: 2px solid var(--school-maroon);
+  outline: 2px solid var(--school-primary);
   outline-offset: 2px;
 }
 
@@ -923,7 +896,7 @@
   overflow: hidden;
   background: #fff;
   border-radius: 0 0 12px 12px;
-  box-shadow: 0 12px 26px rgba(74, 0, 12, 0.28);
+  box-shadow: 0 12px 26px rgba(var(--school-primary-rgb), 0.28);
   z-index: 7;
 }
 

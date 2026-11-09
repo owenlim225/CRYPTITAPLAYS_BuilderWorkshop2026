@@ -1,6 +1,13 @@
 :root {
   --chain-primary: #4da2ff;
   --chain-primary-rgb: 77, 162, 255;
+  --school-primary: #1d4da1;
+  --school-primary-rgb: 29, 77, 161;
+  --school-deep: #153875;
+  --school-dark: #102a58;
+  --school-ink: #162640;
+  --school-ink-soft: rgba(22, 38, 64, 0.66);
+  --school-paper-tint: #f3f7ff;
 }
 
 .app-root > header,
@@ -8,35 +15,35 @@
   background: rgba(255, 255, 255, 0.72);
   -webkit-backdrop-filter: blur(14px) saturate(1.2);
   backdrop-filter: blur(14px) saturate(1.2);
-  color: #221619;
+  color: var(--school-ink);
 }
 
 .app-root > header {
-  border-bottom: 1px solid rgba(128, 0, 22, 0.18);
-  box-shadow: 0 4px 18px rgba(99, 0, 16, 0.08);
+  border-bottom: 1px solid rgba(var(--school-primary-rgb), 0.18);
+  box-shadow: 0 4px 18px rgba(var(--school-primary-rgb), 0.08);
 }
 
 .app-root > footer {
-  border-top: 1px solid rgba(128, 0, 22, 0.18);
-  color: rgba(34, 22, 25, 0.78);
+  border-top: 1px solid rgba(var(--school-primary-rgb), 0.18);
+  color: var(--school-ink);
 }
 
 .app-root > footer strong,
 .app-root > footer b {
-  color: #630010;
+  color: var(--school-deep);
 }
 
 .app-root > header a,
 .app-root > header button {
-  color: #221619;
-  border-color: rgba(128, 0, 22, 0.3);
+  color: var(--school-ink);
+  border-color: rgba(var(--school-primary-rgb), 0.3);
   background: rgba(255, 255, 255, 0.7);
 }
 
 .app-root > header a:hover,
 .app-root > header button:hover {
-  color: #800016;
-  border-color: #800016;
+  color: var(--school-primary);
+  border-color: var(--school-primary);
 }
 
 *,
@@ -79,7 +86,8 @@ button {
 .app-bg {
   position: absolute;
   inset: -16px;
-  background: #1c080d url('../assets/marinduque-state-university-campus.jpg') center / cover no-repeat;
+  background: var(--school-deep) url('../assets/university-of-perpetual-help-system-laguna-campus.webp') center / cover no-repeat;
+  filter: blur(4px);
   pointer-events: none;
   transform: translate3d(var(--bg-offset-x, 0px), var(--bg-offset-y, 0px), 0);
   transition: transform 180ms ease-out;
@@ -101,8 +109,9 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: clamp(8px, 2vw, 24px);
   height: 56px;
-  padding: 0 24px;
+  padding: 0 clamp(12px, 3vw, 24px);
   background: rgba(0, 0, 0, 0.38);
   backdrop-filter: blur(8px);
 }
@@ -116,18 +125,23 @@ button {
 }
 
 .site-header__link:focus-visible {
-  outline: 2px solid var(--chain-primary);
+  outline: 2px solid var(--school-primary);
+}
+
+.app-root > header .site-header__link {
+  border-color: transparent;
+  background: transparent;
 }
 
 .site-header__logo {
   display: block;
-  height: 28px;
-  width: auto;
-  max-width: min(60vw, 280px);
+  width: clamp(52px, 15vw, 128px);
+  height: auto;
 }
 
 .site-header__github {
   display: inline-flex;
+  flex: none;
   align-items: center;
   justify-content: center;
   gap: 8px;
@@ -145,13 +159,13 @@ button {
 }
 
 .site-header__github:hover {
-  border-color: rgba(var(--chain-primary-rgb), 0.45);
-  background: rgba(var(--chain-primary-rgb), 0.08);
+  border-color: rgba(var(--school-primary-rgb), 0.45);
+  background: rgba(var(--school-primary-rgb), 0.08);
   transform: translateY(-1px);
 }
 
 .site-header__github:focus-visible {
-  outline: 2px solid var(--chain-primary);
+  outline: 2px solid var(--school-primary);
   outline-offset: 2px;
 }
 
@@ -159,6 +173,17 @@ button {
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.02em;
+}
+
+@media (max-width: 480px) {
+  .site-header__github {
+    width: 36px;
+    padding: 0;
+  }
+
+  .site-header__github-label {
+    display: none;
+  }
 }
 
 .site-footer {
@@ -184,7 +209,7 @@ button {
   letter-spacing: 0.01em;
   text-align: center;
   text-wrap: pretty;
-  color: #221619;
+  color: var(--school-ink);
 }
 
 .site-footer__kicker {
@@ -194,7 +219,7 @@ button {
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #630010;
+  color: var(--school-deep);
 }
 
 .site-footer__kicker::after {
@@ -283,7 +308,7 @@ button {
   flex-direction: column;
   gap: 12px;
   padding: 14px;
-  border: 1px solid rgba(128, 0, 22, 0.18);
+  border: 1px solid rgba(var(--school-primary-rgb), 0.18);
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.72);
 }
@@ -293,7 +318,7 @@ button {
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.02em;
-  color: #630010;
+  color: var(--school-deep);
 }
 
 .social-actions__share-links {
@@ -310,9 +335,9 @@ button {
   width: 100%;
   height: 44px;
   padding: 0 16px;
-  border: 1px solid rgba(128, 0, 22, 0.18);
+  border: 1px solid rgba(var(--school-primary-rgb), 0.18);
   border-radius: 999px;
-  color: #221619;
+  color: var(--school-ink);
   text-decoration: none;
   background: rgba(255, 255, 255, 0.72);
   cursor: pointer;
@@ -323,13 +348,13 @@ button {
 }
 
 .social-actions__link:hover:not(:disabled) {
-  border-color: rgba(var(--chain-primary-rgb), 0.45);
-  background: rgba(var(--chain-primary-rgb), 0.08);
+  border-color: rgba(var(--school-primary-rgb), 0.45);
+  background: rgba(var(--school-primary-rgb), 0.08);
   transform: translateY(-1px);
 }
 
 .social-actions__link:focus-visible {
-  outline: 2px solid var(--chain-primary);
+  outline: 2px solid var(--school-primary);
   outline-offset: 2px;
 }
 
@@ -355,7 +380,7 @@ button {
 
 .social-actions__export {
   cursor: pointer;
-  color: #221619;
+  color: var(--school-ink);
   transition:
     border-color 160ms ease,
     background 160ms ease,
@@ -364,8 +389,8 @@ button {
 }
 
 .social-actions__export:hover:not(:disabled) {
-  border-color: rgba(var(--chain-primary-rgb), 0.45);
-  background: rgba(var(--chain-primary-rgb), 0.08);
+  border-color: rgba(var(--school-primary-rgb), 0.45);
+  background: rgba(var(--school-primary-rgb), 0.08);
   transform: translateY(-1px);
 }
 
@@ -379,8 +404,8 @@ button {
 }
 
 .social-actions__export.is-generating {
-  color: var(--chain-primary);
-  border-color: rgba(var(--chain-primary-rgb), 0.35);
+  color: var(--school-primary);
+  border-color: rgba(var(--school-primary-rgb), 0.35);
 }
 
 .social-actions__spin {
@@ -388,9 +413,9 @@ button {
 }
 
 .social-actions__spin.is-active {
-  color: var(--chain-primary);
-  border-color: rgba(var(--chain-primary-rgb), 0.35);
-  background: rgba(var(--chain-primary-rgb), 0.08);
+  color: var(--school-primary);
+  border-color: rgba(var(--school-primary-rgb), 0.35);
+  background: rgba(var(--school-primary-rgb), 0.08);
 }
 
 /* Keep the tools within the measured stack on smaller screens. */

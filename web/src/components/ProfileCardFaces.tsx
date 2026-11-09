@@ -4,7 +4,7 @@ import { PROFILE_PHOTO_PATH } from '../lib/profilePhoto';
 import type { UsePortfolioResult } from '../types';
 import BrandIcon from './BrandIcon';
 import '../styles/community-partners.css';
-import SCHOOL_LOGO from '../assets/marinduque-state-university-seal.png';
+import SCHOOL_LOGO from '../assets/university-of-perpetual-help-system-laguna-seal.png';
 
 export function truncateValue(value: string): string {
   if (!value) return '—';
@@ -70,7 +70,7 @@ export function CardFrontFace({
 
       <div className="card-top">
         <div className="brand">
-          <h2>Marinduque State University</h2>
+          <h2>University of Perpetual Help System Laguna</h2>
           <p>CRYPTITA PLAYS BUILDER WORKSHOP 2026</p>
         </div>
         <div className="builder-number">
@@ -85,7 +85,7 @@ export function CardFrontFace({
           </div>
         </div>
         <div className="school-logo-tab">
-          <img src={SCHOOL_LOGO} alt="Marinduque State University seal" />
+          <img src={SCHOOL_LOGO} alt="University of Perpetual Help System Laguna seal" />
         </div>
       </div>
 

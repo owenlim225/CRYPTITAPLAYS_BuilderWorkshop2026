@@ -81,7 +81,7 @@ Built and deployed a Web3 app at the Cryptita Plays Builder Workshop. Big thanks
 
 ${siteUrl}
 
-Learn → Build → Deploy. #Blockchain4Youth #B4HER #Web3OnCampusMARSU`;
+Learn → Build → Deploy. #Blockchain4Youth #B4HER #Web3OnCampus`;
   const linkedInShareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(siteUrl)}`;
 
   const copyLinkedInCaption = () => {

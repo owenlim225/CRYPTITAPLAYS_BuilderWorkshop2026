@@ -44,10 +44,5 @@ export function applyChainTheme(theme: ChainTheme = getActiveChainTheme()): Chai
   root.style.setProperty('--chain-primary-rgb', theme.primaryRgb);
   root.style.setProperty('--blue', theme.primary);
 
-  const themeColorMeta = document.querySelector('meta[name="theme-color"]');
-  if (themeColorMeta) {
-    themeColorMeta.setAttribute('content', theme.primary);
-  }
-
   return theme;
 }
