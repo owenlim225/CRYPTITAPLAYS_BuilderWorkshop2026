@@ -416,10 +416,12 @@ Right-click `move` in VS Code and select **Open in Integrated Terminal**.
 
 ```sh
 pwd
+sed -i '' -E 's#\\+#/#g' Move.lock Move.toml
 sui move build
 sui move test
 ```
 
+If the files contain Windows-style backslashes in dependency paths, the `sed` command changes them to forward slashes for macOS.
 *Build* checks and prepares the Move program.
 *Test* runs its automated checks.
 **Check:** both commands succeed before you publish.
