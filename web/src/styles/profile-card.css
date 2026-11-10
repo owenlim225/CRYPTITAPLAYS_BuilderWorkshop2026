@@ -1315,3 +1315,67 @@ opacity: 0.26;
   .credential-field { padding: 8px 12px; }
   .info-grid { gap: 12px; }
 }
+
+
+/* University seal and small decorative details from the reference */
+.card-top .brand { max-width: 68%; min-width: 0; }
+.card-top .brand h2 {
+  max-width: 100%;
+  color: #fff;
+  font-size: clamp(17px, 2.05vw, 26px);
+  line-height: 1.08;
+  letter-spacing: -.025em;
+}
+.card-top .brand p {
+  color: rgba(255,255,255,.82);
+  font-size: clamp(10px,1.05vw,14px);
+  letter-spacing: .08em;
+}
+.card-top .builder-number {
+  margin-left: auto;
+  margin-right: 112px;
+  min-width: 88px;
+}
+.university-seal {
+  position: absolute;
+  z-index: 8;
+  top: 0;
+  right: 28px;
+  width: 84px;
+  height: 130px;
+  padding: 8px 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border: 1px solid rgba(36,84,166,.16);
+  border-top: 0;
+  border-radius: 0 0 13px 13px;
+  box-shadow: 0 9px 22px rgba(23,55,108,.17);
+}
+.university-seal img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.card-bee {
+  position: absolute;
+  z-index: 6;
+  display: block;
+  font-size: 21px;
+  line-height: 1;
+  filter: drop-shadow(0 2px 2px rgba(18,42,82,.18));
+  pointer-events: none;
+}
+.card-bee--one { top: 8%; left: 42%; transform: rotate(-18deg); }
+.card-bee--two { top: 69%; left: 79%; transform: rotate(15deg); }
+.card-bee--three { bottom: 11%; left: 21%; transform: rotate(-12deg); }
+.card-back { background: #131318; }
+@media (max-width: 760px) {
+  .card-top .brand { max-width: 66%; }
+  .card-top .brand h2 { font-size: clamp(14px,2vw,20px); }
+  .card-top .builder-number { margin-right: 92px; min-width: 62px; padding-left: 12px; }
+  .university-seal { width: 72px; height: 110px; right: 18px; }
+  .card-bee { font-size: 16px; }
+}
