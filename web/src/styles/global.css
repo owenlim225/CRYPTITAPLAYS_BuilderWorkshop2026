@@ -319,3 +319,58 @@ button {
   border-color: rgba(var(--chain-primary-rgb), 0.35);
   background: rgba(var(--chain-primary-rgb), 0.08);
 }
+
+
+/* Campus-inspired page treatment with a softly blurred backdrop */
+:root { --chain-primary: #2454a6; --chain-primary-rgb: 36,84,166; }
+html, body, #root { background: #eaf1fb; }
+body { color: #1e3559; }
+.app-root {
+  background: linear-gradient(135deg,#dce9fb 0%,#eef4fd 55%,#d6e5fa 100%);
+}
+.app-root::before {
+  content: "";
+  position: absolute;
+  inset: 56px 0 48px;
+  background:
+    linear-gradient(rgba(30,67,125,.26),rgba(30,67,125,.26)),
+    url("/assets/hero.png") center / cover no-repeat;
+  filter: blur(2px) saturate(.88);
+  transform: scale(1.015);
+  opacity: .88;
+  pointer-events: none;
+}
+.site-header {
+  background: rgba(216,230,250,.93);
+  border-bottom: 1px solid rgba(51,91,150,.12);
+  backdrop-filter: blur(14px);
+}
+.site-header__github { color: #263b5d; background: rgba(255,255,255,.8); border-color: rgba(44,84,145,.16); }
+.site-footer {
+  background: rgba(225,236,251,.94);
+  border-top: 1px solid rgba(51,91,150,.12);
+}
+.site-footer__disclaimer { color: rgba(37,59,91,.72); }
+.site-footer__kicker { color: rgba(37,59,91,.85); }
+.social-actions { width: 174px; gap: 14px; }
+.social-actions__share {
+  border-color: rgba(39,79,142,.16);
+  background: rgba(246,250,255,.88);
+  box-shadow: 0 12px 28px rgba(29,66,124,.12);
+}
+.social-actions__share-title { color: #233d66; }
+.social-actions__link {
+  color: #29466f;
+  border-color: rgba(39,79,142,.16);
+  background: rgba(255,255,255,.76);
+}
+.social-actions__camera.is-generating, .social-actions__spin.is-active {
+  color: #2454a6;
+  border-color: rgba(36,84,166,.35);
+  background: rgba(36,84,166,.08);
+}
+@media (max-width: 900px) {
+  .card-stage__stack { gap: 10px; }
+  .social-actions { width: 144px; }
+  .social-actions__link { padding: 0 12px; }
+}
