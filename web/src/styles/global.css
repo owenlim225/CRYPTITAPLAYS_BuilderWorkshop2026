@@ -333,11 +333,14 @@ body { color: #1e3559; }
   position: absolute;
   inset: 56px 0 48px;
   background:
-    linear-gradient(rgba(30,67,125,.26),rgba(30,67,125,.26)),
-    url("/assets/hero.png") center / cover no-repeat;
-  filter: blur(2px) saturate(.88);
-  transform: scale(1.015);
-  opacity: .88;
+    radial-gradient(ellipse at 17% 11%, rgba(255,255,255,.70) 0 4%, transparent 17%),
+    radial-gradient(ellipse at 69% 15%, rgba(255,255,255,.44) 0 5%, transparent 20%),
+    repeating-linear-gradient(90deg, transparent 0 70px, rgba(45,82,135,.12) 71px 74px, transparent 75px 142px),
+    repeating-linear-gradient(0deg, transparent 0 62px, rgba(45,82,135,.10) 63px 65px, transparent 66px 124px),
+    linear-gradient(180deg, #287bc6 0%, #7eb8e5 34%, #eef4fa 35%, #f9fbfd 78%, #6d8f54 79%, #476f3b 100%);
+  filter: blur(3px) saturate(.92);
+  transform: scale(1.02);
+  opacity: .92;
   pointer-events: none;
 }
 .site-header {
