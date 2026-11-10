@@ -4,6 +4,8 @@ import { PROFILE_PHOTO_PATH } from '../lib/profilePhoto';
 import type { UsePortfolioResult } from '../types';
 import BrandIcon from './BrandIcon';
 
+const UNIVERSITY_SEAL_SRC = 'data:image/jpeg;base64,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';
+
 export function truncateValue(value: string): string {
   if (!value) return '—';
   if (value.length <= 14) return value;
@@ -68,8 +70,8 @@ export function CardFrontFace({
 
       <div className="card-top">
         <div className="brand">
-          <h2>CRYPTITA PLAYS</h2>
-          <p>BUILDER WORKSHOP 2026</p>
+          <h2>University of Perpetual Help System Laguna</h2>
+          <p>CRYPTITA PLAYS BUILDER WORKSHOP 2026</p>
         </div>
         <div className="builder-number">
           <span className="builder-number-label">BUILDER NO.</span>
@@ -82,7 +84,14 @@ export function CardFrontFace({
             />
           </div>
         </div>
+        <div className="university-seal" aria-label="University of Perpetual Help System Laguna seal">
+          <img src={UNIVERSITY_SEAL_SRC} alt="University of Perpetual Help System Laguna seal" />
+        </div>
       </div>
+
+      <span className="card-bee card-bee--one" aria-hidden="true">🐝</span>
+      <span className="card-bee card-bee--two" aria-hidden="true">🐝</span>
+      <span className="card-bee card-bee--three" aria-hidden="true">🐝</span>
 
       <div className="card-main">
         <div className="profile-photo-wrap">
